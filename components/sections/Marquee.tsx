@@ -17,24 +17,13 @@ const ITEMS: (string | string[])[] = [
 
 export default function Marquee() {
   const renderItem = (item: string | string[], i: number) => {
-    if (Array.isArray(item)) {
-      return (
-        <span
-          key={i}
-          className="font-display font-semibold text-ink-faint inline-flex items-center gap-6 sm:gap-12"
-        >
-          {item[0] && <>{item[0]}&nbsp;</>}
-          <span className="italic-serif text-violet-300">{item[1]}</span>
-          <span className="text-magenta text-[0.6em]">✧</span>
-        </span>
-      );
-    }
+    const label = Array.isArray(item) ? item.join(' ') : item;
     return (
       <span
         key={i}
         className="font-display font-semibold text-ink-faint inline-flex items-center gap-6 sm:gap-12"
       >
-        {item}
+        {label}
         <span className="text-magenta text-[0.6em]">✧</span>
       </span>
     );
