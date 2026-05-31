@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Reveal from '@/components/motion/Reveal';
-import SectionHead from '@/components/ui/SectionHead';
 
 type Status = 'idle' | 'sending' | 'success' | 'error';
 
@@ -66,17 +65,7 @@ export default function Contact() {
   return (
     <section id="contact" className="section-y">
       <div className="wrap">
-        <SectionHead
-          kicker="Get in touch"
-          title={
-            <>
-              First conversation: thirty minutes.
-              {' '}
-              <span className="italic-serif text-gradient-magenta">No cost. No commitment.</span>
-            </>
-          }
-          lede="Tell us what you have in mind for your event — the audience, the vision, the moments you want to create. We will tell you, honestly and clearly, what it will take to deliver it at the Aurastic standard."
-        />
+        {/* Section header removed as per new design */}
 
         <div className="grid gap-4 sm:gap-5 lg:grid-cols-[1fr_1.15fr]">
           {/* ──────────────── LEFT: Contact info / direct channels ──────────────── */}
@@ -186,7 +175,7 @@ export default function Contact() {
 
           {/* ──────────────── RIGHT: Contact form ──────────────── */}
           <Reveal delay={0.1}>
-            <div className="relative h-full p-6 sm:p-8 lg:p-10 rounded-[24px] sm:rounded-[28px] border border-white/[0.22] bg-deep/50 overflow-hidden">
+            <div className="relative h-full p-6 sm:p-8 lg:p-10 rounded-[24px] sm:rounded-[28px] border border-white/[0.22] bg-deep/50">
               {status === 'success' ? (
                 <SuccessState onReset={() => setStatus('idle')} />
               ) : (

@@ -7,14 +7,14 @@ const HORIZONS = [
   {
     year: 'Year 1',
     headline: 'Prove the model',
-    body: 'Cement Aurastic Productions as South India\u2019s benchmark for artistic event execution. Deliver every event to the full Aurastic standard, regardless of budget. Lock the operational playbook.',
+    body: 'Aurastic Productions as South India\u2019s benchmark for artistic event execution. Deliver every event to the full Aurastic standard, regardless of budget. Lock the operational playbook.',
     metrics: ['50+ events delivered', 'Multi-college presence', 'First crore-level production'],
     accent: 'violet',
   },
   {
     year: 'Year 2',
     headline: 'Scale the team',
-    body: 'Build a permanent core team across the 12 service sectors. Move from founder-on-every-event to founder-on-every-major-event. Codify training so the standard travels with new hires.',
+    body: 'Build a permanent core team across the 12 service sectors. Move from founder on every event to founder on every major event. Codify training so the standard travels with new hires.',
     metrics: ['Core team of 20+', 'Pan-Tamil-Nadu coverage', 'In-house equipment ownership'],
     accent: 'violet',
   },
@@ -28,14 +28,14 @@ const HORIZONS = [
   {
     year: 'Year 4',
     headline: 'National footprint',
-    body: 'Productions arm expands beyond South India. Aurastic AI begins onboarding partner production houses outside Aurastic\u2019s direct execution radius — extending the standard, not diluting it.',
+    body: 'Productions arm expands beyond South India. Aurastic AI begins onboarding partner production houses outside Aurastic\u2019s direct execution radius extending the standard, not diluting it.',
     metrics: ['Bengaluru + Hyderabad ops', 'Partner network seeded', 'AI-driven events nationwide'],
     accent: 'magenta',
   },
   {
     year: 'Year 5',
     headline: 'Own the word',
-    body: 'When a stranger hears \u201cAurastic,\u201d one feeling rises before any other: ARTISTIC. The benchmark for what an event can be — held in Productions, scaled through AI, recognised across India.',
+    body: 'When a stranger hears \u201cAurastic,\u201d one feeling rises before any other: ARTISTIC. The benchmark for what an event can be held in Productions, scaled through AI, recognised across India.',
     metrics: ['#1 recall in artistic execution', 'Series A horizon', 'The category we created'],
     accent: 'magenta',
   },
@@ -52,11 +52,27 @@ export default function NorthStar() {
           kicker="The 5-Year North Star"
           title={
             <>
-              Not aspirations.{' '}
+              Not aspirations.
+              <br />
               <span className="italic-serif text-gradient-magenta">Co-ordinates.</span>
             </>
           }
-          lede="The measurable, specific targets Aurastic is building toward across the next five years. The destination, in writing, so every event between now and then is judged against it."
+          lede={
+            <span style={{
+              fontFamily: 'var(--font-biko)',
+              fontSize: 'clamp(17px, 1.4vw, 22px)',
+              fontWeight: 500,
+              lineHeight: 1.6,
+              background: 'linear-gradient(90deg, #a78bfa 0%, #e879f9 50%, #a78bfa 100%)',
+              backgroundSize: '200% auto',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              animation: 'gradient-flow 4s linear infinite',
+              display: 'block',
+            }}>
+              The measurable, specific targets Aurastic is building toward across the next five years. The destination, in writing, so every event between now and then is judged against it.
+            </span>
+          }
         />
 
         <div className="relative">
@@ -88,7 +104,7 @@ export default function NorthStar() {
                   >
                     <div className="flex flex-wrap items-baseline gap-3 sm:gap-5">
                       <div
-                        className={`text-[11px] tracking-[0.22em] uppercase font-bold ${
+                        className={`text-[20px] tracking-[0.22em] uppercase font-bold ${
                           h.accent === 'magenta' ? 'text-magenta' : 'text-violet-300'
                         }`}
                       >
@@ -96,14 +112,14 @@ export default function NorthStar() {
                       </div>
                       <h3
                         className="font-display font-bold tracking-[-0.02em]"
-                        style={{ fontSize: 'clamp(20px, 2.2vw, 32px)' }}
+                        style={{ fontSize: 'clamp(15px, 2.2vw, 32px)' }}
                       >
                         {h.headline}
                       </h3>
                     </div>
                     <p
-                      className="mt-3 text-ink-muted leading-[1.65] max-w-[68ch]"
-                      style={{ fontSize: 'clamp(14px, 1.05vw, 17px)' }}
+                      className="mt-3 text-ink-muted leading-[1.65]"
+                      style={{ fontSize: 'clamp(18px, 1.05vw, 17px)' }}
                     >
                       {h.body}
                     </p>
@@ -111,7 +127,7 @@ export default function NorthStar() {
                       {h.metrics.map((m) => (
                         <span
                           key={m}
-                          className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] sm:text-[12px] border border-white/[0.10] bg-void/40 text-ink-muted"
+                          className="inline-flex items-center px-2.5 py-1 rounded-full text-[15px] sm:text-[15px] border border-white/[0.10] bg-void/40 text-ink-muted"
                         >
                           {m}
                         </span>

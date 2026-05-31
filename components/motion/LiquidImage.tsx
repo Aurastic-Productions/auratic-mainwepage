@@ -92,3 +92,5 @@ export default function LiquidImage({ src, alt, className = '', sizes }: Props) 
     </div>
   );
 }
+
+

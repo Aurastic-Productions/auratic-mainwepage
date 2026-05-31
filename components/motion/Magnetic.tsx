@@ -47,3 +47,5 @@ export default function Magnetic({ children, className, strength = 0.3 }: Props)
     </div>
   );
 }
+
+

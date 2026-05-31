@@ -58,10 +58,12 @@ export default function AnimatedCounter({
   }, [from, to, duration]);
 
   return (
-    <span ref={ref} className={className}>
+    <span ref={ref} className={className} style={{ fontFamily: 'var(--font-exo)', fontWeight: 700 }}>
       {prefix}
       {value.toFixed(decimals)}
       {suffix}
     </span>
   );
 }
+
+

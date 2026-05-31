@@ -80,11 +80,11 @@ export default function AuraMode() {
             className="absolute inset-0 mix-blend-color-dodge"
             animate={{
               background: [
-                'radial-gradient(circle at 20% 30%, rgba(232,121,249,0.55), transparent 50%)',
+                'radial-gradient(circle at 20% 30%, rgba(124,58,237,0.55), transparent 50%)',
                 'radial-gradient(circle at 80% 20%, rgba(139,92,246,0.55), transparent 50%)',
                 'radial-gradient(circle at 50% 80%, rgba(59,130,246,0.55), transparent 50%)',
-                'radial-gradient(circle at 30% 50%, rgba(236,72,153,0.55), transparent 50%)',
-                'radial-gradient(circle at 20% 30%, rgba(232,121,249,0.55), transparent 50%)',
+                'radial-gradient(circle at 30% 50%, rgba(109,40,217,0.55), transparent 50%)',
+                'radial-gradient(circle at 20% 30%, rgba(124,58,237,0.55), transparent 50%)',
               ],
             }}
             transition={{ duration: 2.4, repeat: Infinity, ease: 'linear' }}
@@ -94,7 +94,7 @@ export default function AuraMode() {
             animate={{
               background: [
                 'radial-gradient(circle at 80% 80%, rgba(139,92,246,0.45), transparent 55%)',
-                'radial-gradient(circle at 10% 90%, rgba(232,121,249,0.45), transparent 55%)',
+                'radial-gradient(circle at 10% 90%, rgba(124,58,237,0.45), transparent 55%)',
                 'radial-gradient(circle at 90% 10%, rgba(59,130,246,0.45), transparent 55%)',
                 'radial-gradient(circle at 80% 80%, rgba(139,92,246,0.45), transparent 55%)',
               ],
@@ -123,7 +123,7 @@ export default function AuraMode() {
                   delay: Math.random() * 2,
                   ease: 'easeOut',
                 }}
-                style={{ boxShadow: '0 0 8px #fff, 0 0 16px #e879f9' }}
+                style={{ boxShadow: '0 0 8px #fff, 0 0 16px #7C3AED' }}
               />
             );
           })}
@@ -135,11 +135,11 @@ export default function AuraMode() {
             exit={{ y: 20, opacity: 0 }}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto text-center"
           >
-            <div className="font-display text-[clamp(32px,6vw,88px)] font-extrabold tracking-[-0.03em] leading-none">
-              <span className="block text-white drop-shadow-[0_0_30px_rgba(232,121,249,0.9)]">
+            <div className="italic-serif text-[clamp(32px,6vw,88px)] font-extrabold tracking-[-0.03em] leading-none">
+              <span className="block text-white drop-shadow-[0_0_30px_rgba(124,58,237,0.9)]">
                 AURA MODE
               </span>
-              <span className="italic-serif text-magenta mt-2 block drop-shadow-[0_0_40px_rgba(232,121,249,0.9)]">
+              <span className="italic-serif text-magenta mt-2 block drop-shadow-[0_0_40px_rgba(124,58,237,0.9)]">
                 activated.
               </span>
             </div>
@@ -165,3 +165,5 @@ export default function AuraMode() {
     </AnimatePresence>
   );
 }
+
+

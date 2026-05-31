@@ -1,20 +1,17 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import type { CSSProperties } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 type Props = {
   words: string[];
   interval?: number;
   className?: string;
+  style?: CSSProperties;
 };
 
-/**
- * RotatingWord — cycles through an array of words with
- * a smooth vertical slide animation. Each word gets the
- * spotlight for a moment before being replaced.
- */
-export default function RotatingWord({ words, interval = 2400, className = '' }: Props) {
+export default function RotatingWord({ words, interval = 2400, className = '', style }: Props) {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -24,29 +21,21 @@ export default function RotatingWord({ words, interval = 2400, className = '' }:
     return () => clearInterval(id);
   }, [words.length, interval]);
 
-  // Use the longest word for consistent sizing (prevents layout shift)
-  const longest = words.reduce((a, b) => (a.length >= b.length ? a : b));
-
   return (
-    <span className="relative inline-block align-baseline" style={{ minWidth: `${longest.length}ch` }}>
-      <span className="invisible italic-serif">{longest}</span>
+    <span className="relative inline-grid overflow-visible align-bottom">
       <AnimatePresence mode="wait">
         <motion.span
           key={words[index]}
-          initial={{ y: '100%', opacity: 0, rotateX: -90 }}
-          animate={{ y: '0%', opacity: 1, rotateX: 0 }}
-          exit={{ y: '-100%', opacity: 0, rotateX: 90 }}
-          transition={{
-            duration: 0.7,
-            ease: [0.16, 1, 0.3, 1],
-          }}
-          className={`absolute top-0 left-0 italic-serif py-1 ${className}`}
-          style={{
-            transformOrigin: 'center center',
-            transformStyle: 'preserve-3d',
-          }}
+          initial={{ y: '60%', opacity: 0 }}
+          animate={{ y: '0%', opacity: 1 }}
+          exit={{ y: '-60%', opacity: 0 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="col-start-1 row-start-1 whitespace-nowrap"
         >
-          {words[index]}
+          {/* Inner span holds the gradient — isolated from opacity animation */}
+          <span className={className} style={style}>
+            {words[index]}
+          </span>
         </motion.span>
       </AnimatePresence>
     </span>

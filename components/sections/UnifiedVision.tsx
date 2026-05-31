@@ -11,14 +11,29 @@ export default function UnifiedVision() {
     >
       <div className="wrap">
         <SectionHead
-          kicker="The Unified Vision"
+          kicker="The Unified Aim"
           title={
             <>
               One company. Two limbs.{' '}
               <span className="italic-serif text-gradient-magenta">One aura.</span>
             </>
           }
-          lede="Aurastic is not two separate businesses. It is one company expressed through two complementary limbs that serve the same artistic mission."
+          lede={
+            <span style={{
+              fontFamily: 'var(--font-biko)',
+              fontSize: 'clamp(17px, 1.4vw, 22px)',
+              fontWeight: 500,
+              lineHeight: 1.6,
+              background: 'linear-gradient(90deg, #a78bfa 0%, #e879f9 50%, #a78bfa 100%)',
+              backgroundSize: '200% auto',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              animation: 'gradient-flow 4s linear infinite',
+              display: 'block',
+            }}>
+              Aurastic is not two separate businesses. It is one company expressed through two complementary limbs that serve the same artistic mission.
+            </span>
+          }
         />
 
         <div className="grid gap-6 lg:grid-cols-2 mb-10 sm:mb-12">
@@ -28,7 +43,7 @@ export default function UnifiedVision() {
               <div className="absolute top-6 right-6 sm:top-8 sm:right-8 text-[10px] tracking-[0.2em] uppercase text-violet-300/70 font-bold">
                 Live now
               </div>
-              <div className="text-[11px] tracking-[0.2em] uppercase text-violet-300 font-bold">
+              <div className="text-[15px] tracking-[0.2em] uppercase text-violet-300 font-bold">
                 Aurastic Productions
               </div>
               <h3
@@ -39,9 +54,9 @@ export default function UnifiedVision() {
               </h3>
               <p
                 className="mt-5 text-ink-muted leading-[1.7]"
-                style={{ fontSize: 'clamp(14px, 1.05vw, 17px)' }}
+                style={{ fontSize: 'clamp(15px, 1.05vw, 18px)' }}
               >
-                The execution arm. How the aura gets created today — in real rooms, on real stages,
+                The execution arm. How the aura gets created today in real rooms, on real stages,
                 with real sound, real lights, real people. Every event that is planned, designed,
                 and delivered happens here.
               </p>
@@ -49,7 +64,7 @@ export default function UnifiedVision() {
                 className="mt-4 text-ink-muted leading-[1.7]"
                 style={{ fontSize: 'clamp(14px, 1.05vw, 17px)' }}
               >
-                This is the limb that is operational, revenue-generating, and client-facing right
+                This is the limb that is operational, revenue generating, and client facing right
                 now.
               </p>
               <div className="mt-6 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/15 border border-violet-400/30 text-[11px] sm:text-[12px] tracking-[0.12em] uppercase text-violet-200 font-semibold">
@@ -65,7 +80,7 @@ export default function UnifiedVision() {
               <div className="absolute top-6 right-6 sm:top-8 sm:right-8 text-[10px] tracking-[0.2em] uppercase text-magenta/80 font-bold">
                 In ideation
               </div>
-              <div className="text-[11px] tracking-[0.2em] uppercase text-magenta font-bold">
+              <div className="text-[15px] tracking-[0.2em] uppercase text-magenta font-bold">
                 Aurastic AI
               </div>
               <h3
@@ -76,10 +91,10 @@ export default function UnifiedVision() {
               </h3>
               <p
                 className="mt-5 text-ink-muted leading-[1.7]"
-                style={{ fontSize: 'clamp(14px, 1.05vw, 17px)' }}
+                style={{ fontSize: 'clamp(15px, 1.05vw, 18px)' }}
               >
-                The intelligence arm. A platform being developed so any client — a college
-                coordinator, a corporate HR manager, a wedding family — can describe their event
+                The intelligence arm. A platform being developed so any client a college
+                coordinator, a corporate HR manager, a wedding family can describe their event
                 and instantly receive a structured quotation generated across Aurastic&rsquo;s
                 twelve service sectors.
               </p>
@@ -88,7 +103,7 @@ export default function UnifiedVision() {
                 style={{ fontSize: 'clamp(14px, 1.05vw, 17px)' }}
               >
                 The moment the client confirms, Aurastic&rsquo;s execution workflow activates
-                automatically — passing the event directly into the Productions arm.
+                automatically passing the event directly into the Productions arm.
               </p>
               <div className="mt-6 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-magenta/15 border border-magenta/30 text-[11px] sm:text-[12px] tracking-[0.12em] uppercase text-magenta font-semibold">
                 <span className="w-1.5 h-1.5 rounded-full bg-magenta" />
@@ -100,7 +115,7 @@ export default function UnifiedVision() {
 
         <Reveal direction="up" duration={0.9} delay={0.2}>
           <div className="rounded-[20px] sm:rounded-[24px] border border-white/[0.10] bg-deep/40 p-7 sm:p-10 lg:p-12 text-center">
-            <div className="text-[11px] tracking-[0.22em] uppercase text-violet-300 font-bold">
+            <div className="text-[15px] tracking-[0.22em] uppercase text-violet-300 font-bold">
               Why the two are inseparable
             </div>
             <p
@@ -114,11 +129,11 @@ export default function UnifiedVision() {
             </p>
             <p
               className="mt-6 font-display tracking-[-0.01em]"
-              style={{ fontSize: 'clamp(18px, 1.8vw, 30px)' }}
+              style={{ fontSize: 'clamp(22px, 1.8vw, 32px)' }}
             >
-              <span className="text-violet-300">Productions is the hands.</span>{' '}
-              <span className="text-magenta">AI is the brain.</span>{' '}
-              <span className="italic-serif text-white">Both serve the same aura.</span>
+              <span className="text-violet-300">Productions is the hands, </span>{' '}
+              <span className="text-magenta">AI is the brain </span>{' '}
+              <span className="italic-serif text-white">Both serve the same aura </span>
             </p>
           </div>
         </Reveal>

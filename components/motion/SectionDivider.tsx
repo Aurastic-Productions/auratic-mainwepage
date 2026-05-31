@@ -65,35 +65,42 @@ export default function SectionDivider({ label }: Props) {
   return (
     <div
       ref={ref}
-      className="relative py-12 sm:py-16 lg:py-20 pointer-events-none"
+      className="relative py-8 sm:py-12 pointer-events-none flex justify-center items-center w-full"
       aria-hidden
     >
-      <div className="wrap relative flex items-center gap-5 sm:gap-7">
+      <div className="w-full max-w-[90%] mx-auto relative flex items-center justify-center gap-4 sm:gap-6">
         <div className="relative flex-1 h-px">
           <div
             data-line
-            className="absolute inset-0 origin-left"
+            className="absolute inset-0 origin-right"
             style={{
-              background:
-                'linear-gradient(90deg, transparent, rgba(199,180,253,0.45) 30%, rgba(232,121,249,0.45) 70%, transparent)',
+              background: 'linear-gradient(90deg, transparent, rgba(139,92,246,0.6))',
               willChange: 'transform',
             }}
           />
         </div>
+        
         {label && (
           <span
             data-label
-            className="t-kicker !text-ink-faint shrink-0"
+            className="shrink-0 tracking-[0.4em] uppercase"
+            style={{
+              fontFamily: 'var(--font-bankgothic)',
+              fontSize: 'clamp(16px, 1.4vw, 20px)',
+              fontWeight: 400,
+              color: 'rgba(255,255,255,0.75)',
+              letterSpacing: '0.4em',
+            }}
           >
             {label}
           </span>
         )}
+        
         <div className="relative flex-1 h-px">
           <div
-            className="absolute inset-0 origin-right"
+            className="absolute inset-0 origin-left"
             style={{
-              background:
-                'linear-gradient(90deg, transparent, rgba(199,180,253,0.18))',
+              background: 'linear-gradient(270deg, transparent, rgba(139,92,246,0.6))',
             }}
           />
         </div>
@@ -101,3 +108,5 @@ export default function SectionDivider({ label }: Props) {
     </div>
   );
 }
+
+

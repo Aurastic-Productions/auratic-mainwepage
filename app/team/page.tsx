@@ -9,6 +9,7 @@ type TeamCard = {
   role: string;
   tag: string;
   name?: string;
+  badge?: string;
   hook?: string;
   blurb?: string;
   filled?: boolean;
@@ -19,6 +20,7 @@ const TEAM: TeamCard[] = [
     role: 'Founder & Artistic Director',
     tag: 'Leadership',
     name: 'Dwarakesh Venkateshan',
+    badge: 'AD',
     hook: 'Audio · Lighting · LED · DJ · Photo · Direction',
     blurb:
       'Multidisciplinary creative who can step into any console on the ground. Leads creative direction and on-event execution.',
@@ -27,26 +29,37 @@ const TEAM: TeamCard[] = [
   {
     role: 'Co-Founder & CTO',
     tag: 'Aurastic AI',
+    badge: 'CT',
     blurb:
       'Architect of Aurastic AI — the platform that scales the technical-flow translation across every event Aurastic touches.',
   },
   {
     role: 'Chief Operating Officer',
     tag: 'Operations',
+    badge: 'OP',
     blurb:
       'Owns day-to-day operations, vendor relationships, equipment ownership pipeline, and organisational health.',
   },
   {
     role: 'Executive Manager',
-    tag: 'Client',
+    tag: 'Production',
+    badge: 'EM',
     blurb:
-      'First voice the client hears and the last one to sign off. Translates the brief into a quotation and the quotation into a run-of-show.',
+      'Owns the on-ground execution. Supervises the production setup, coordinates with vendors during the event, and ensures the run-of-show is executed perfectly on site.',
   },
   {
-    role: 'Technical Lead',
-    tag: 'Production',
+    role: 'Lead Developer',
+    tag: 'Engineering',
+    badge: 'LD',
     blurb:
-      'Owns the technical flow on the ground — sound, light, LED, SFX, structure — and keeps every console in lock-step on show night.',
+      'Works closely with the CTO to build and maintain the digital infrastructure of Aurastic, developing the platforms, apps, and websites that power the business.',
+  },
+  {
+    role: 'Graphic Designer',
+    tag: 'Creative',
+    badge: 'GD',
+    blurb:
+      'Crafts the visual identity of every event. From digital marketing assets to on-ground stage visuals and branding.',
   },
 ];
 
@@ -65,7 +78,7 @@ export default function TeamPage() {
       {/* ─────────── Page hero ─────────── */}
       <section className="wrap pb-12 sm:pb-16 lg:pb-20">
         <Reveal direction="fade">
-          <div className="flex items-center gap-3 text-[11px] sm:text-[12px] tracking-[0.18em] sm:tracking-[0.2em] uppercase text-violet-300 font-semibold">
+          <div className="flex items-center gap-3 text-[12px] sm:text-[13px] tracking-[0.18em] sm:tracking-[0.2em] uppercase text-violet-300 font-semibold">
             <span className="w-6 sm:w-7 h-px bg-violet-400" />
             The Crew
           </div>
@@ -80,7 +93,7 @@ export default function TeamPage() {
         </SplitText>
         <SplitText
           as="h1"
-          className="font-display font-extrabold leading-[0.95] tracking-[-0.03em] italic-serif text-gradient-magenta"
+          className="font-display font-extrabold leading-[0.95] tracking-[-0.03em] font-display text-gradient-magenta"
           delay={0.25}
         >
           the aura.
@@ -109,30 +122,74 @@ export default function TeamPage() {
                 className="absolute inset-0 pointer-events-none"
                 style={{
                   background:
-                    'radial-gradient(ellipse 60% 50% at 0% 100%, rgba(139,92,246,0.25), transparent 60%), radial-gradient(ellipse 50% 40% at 100% 0%, rgba(232,121,249,0.18), transparent 60%)',
+                    'radial-gradient(ellipse 60% 50% at 0% 100%, rgba(139,92,246,0.25), transparent 60%), radial-gradient(ellipse 50% 40% at 100% 0%, rgba(109,40,217,0.18), transparent 60%)',
                 }}
               />
 
               {/* Portrait card */}
               <div className="relative">
                 <div className="relative aspect-[3/4] max-w-[460px] mx-auto lg:mx-0 w-full rounded-[20px] sm:rounded-[24px] overflow-hidden border border-white/[0.22] bg-gradient-to-b from-violet-700 to-surface">
-                  <FounderPortrait />
-                  <div className="absolute bottom-3 left-3 right-3 sm:bottom-5 sm:left-5 sm:right-5 p-3 px-4 bg-void/70 backdrop-blur-xl border border-white/[0.22] rounded-[12px] sm:rounded-[14px] flex justify-between text-[11px] sm:text-[12px] tracking-[0.05em]">
-                    <span className="text-violet-200 font-semibold">Chennai, IN</span>
-                    <span className="text-ink-muted">Since 15 Oct 2025</span>
-                  </div>
+                  <img src="/team/founder_cropped.jpg" alt="Dwarakesh Venkateshan" className="w-full h-full object-cover" />
                 </div>
 
-                <div className="mt-5 grid grid-cols-3 gap-3 max-w-[460px] mx-auto lg:mx-0">
-                  <Stat v="20+" l="Events" />
-                  <Stat v="20K+" l="Crowd reached" />
-                  <Stat v="12" l="Service sectors" />
+
+                <div className="mt-6 flex flex-wrap gap-2 max-w-[460px] mx-auto lg:mx-0">
+                  {[
+                    'Artistic Director',
+                    'Event Organiser',
+                    'DJ Dwara',
+                    'Dancer',
+                    'AI & ML',
+                    'Editor',
+                    'Designer',
+                    'Audio Mixing',
+                    'Photographer',
+                    
+                  ].map((t) => (
+                    <span
+                      key={t}
+                      className="px-3 py-1.5 rounded-full border border-violet-400/30 text-[13px] sm:text-[14px] font-medium text-violet-100 bg-violet-500/[0.10]"
+                    >
+                      {t}
+                    </span>
+                  ))}
                 </div>
+                {/* Origin timeline */}
+                <div className="mt-8 sm:mt-10">
+                  <div className="text-[12px] sm:text-[13px] tracking-[0.18em] uppercase text-violet-300 font-bold mb-6">
+                    The Journey
+                  </div>
+                  <ol className="relative space-y-4">
+                    <span aria-hidden className="absolute left-[13px] top-2 bottom-2 w-px bg-gradient-to-b from-violet-400/60 via-violet-400/20 to-transparent" />
+                    {[
+                      ['School', 'Stage & Screen', 'Dancer, choreographer, and self-taught editor — discovering the energy between performer and crowd.'],
+                      ['Age 15', 'Editor', 'Self-taught in photography, video editing & audio mixing. Adobe Suite, Filmora, Audition.'],
+                      ['2023', 'Disc Jockey', 'Bought his own gear, played every campus event at Veltech. Two tracks of one life braiding into one craft.'],
+                      ['2024', 'Lavaza 2024', 'Core production team — three concert nights with Thaman, Ram Miriyala, DJ Gautham.'],
+                      ['2025', 'Lavaza 2025 + Veera Dheera Sooran', 'On-stage host at the VDS audio launch alongside Vikram, SJ Suryah and GV Prakash. Console DJ as DJ Dwara , Karthick Live, first 20,000-plus crowd. L-Acoustics, DiGiCo, GrandMA3.'],
+                      ['15 Oct 2025', 'Aurastic Launches', "Born on the founder's birthday. Every skill from a decade of learning — unified under one banner, one aura."],
+                      ['2026', 'Lavaza 2026 + Lik Movie Anirudh Launch  ', 'Continued as console DJ and production lead in fully professional live environments.'],
+                      
+                    ].map(([year, label, detail], i) => (
+                      <li key={i} className="relative pl-9">
+                        <span className="absolute left-0 top-1 w-[28px] h-[28px] grid place-items-center rounded-full border border-violet-400/50 bg-deep/80 text-[11px] font-bold text-violet-200">
+                          {String(i + 1).padStart(2, '0')}
+                        </span>
+                        <div className="flex flex-wrap items-center gap-2 mb-1">
+                          <span className="text-[13px] font-bold tracking-[0.06em] uppercase text-violet-300">{year}</span>
+                          <span className="text-[14px] font-semibold text-white/90">— {label}</span>
+                        </div>
+                        <p className="text-[13px] sm:text-[14px] text-white/55 leading-[1.65]">{detail}</p>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+
               </div>
 
               {/* Bio column */}
               <div className="relative">
-                <div className="flex items-center gap-3 text-[11px] sm:text-[12px] tracking-[0.18em] sm:tracking-[0.2em] uppercase text-violet-300 font-semibold">
+                <div className="flex items-center gap-3 text-[12px] sm:text-[13px] tracking-[0.18em] sm:tracking-[0.2em] uppercase text-violet-300 font-semibold">
                   <span className="w-6 sm:w-7 h-px bg-violet-400" />
                   Founder Spotlight
                 </div>
@@ -146,87 +203,82 @@ export default function TeamPage() {
 
                 <div
                   className="mt-2 tracking-[0.12em] sm:tracking-[0.14em] uppercase text-magenta font-semibold"
-                  style={{ fontSize: 'clamp(12px, 1vw, 15px)' }}
+                  style={{ fontSize: 'clamp(13px, 1.05vw, 16px)' }}
                 >
                   Founder & Artistic Director
                 </div>
 
                 <div
                   className="mt-6 space-y-4 sm:space-y-5 max-w-[60ch] text-ink-muted leading-[1.7]"
-                  style={{ fontSize: 'clamp(15px, 1.05vw, 17px)' }}
+                  style={{ fontSize: 'clamp(16px, 1.15vw, 19px)' }}
                 >
                   <p>
-                    Dwarakesh is a multidisciplinary creative — photographer, editor,
-                    audio engineer, visual designer, DJ, and event production specialist —
-                    whose entire professional life has been built around a single
-                    instinct: that an event is not a service, but an art form.
+                    The story began on school stages — through dance, choreography, cultural
+                    competitions, and live performances — where Dwarakesh first discovered the
+                    energy that exists between a performer and a crowd. Dance was never just an
+                    extracurricular activity. It was the first time he experienced how rhythm,
+                    timing, movement, and atmosphere could completely shift the emotion inside a room.
                   </p>
                   <p>
-                    His creative journey began at Velammal International School, where he
-                    moved from performing on stage as a dancer to designing what happened
-                    behind and around it — editing LED visuals for school annual days,
-                    mixing audio for dance sequences, handling post‑production for
-                    promos. He picked up a DSLR at fourteen and self‑trained in Filmora,
-                    the Adobe Creative Suite, and Adobe Audition long before any
-                    institution put a syllabus in front of him.
+                    While performing, his attention slowly moved beyond the stage itself toward the
+                    invisible elements shaping the feeling around it — lighting, visuals, music,
+                    transitions, and audience reactions. That curiosity led him into editing, visual
+                    storytelling, creative design, and event-related media during school. Over time,
+                    none of it felt like separate skills. Visuals, music, movement, timing, stage
+                    flow, and audience energy all began feeling like different expressions of the
+                    same emotion.
                   </p>
                   <p>
-                    At Veltech University in Chennai — a B.Tech in AI &amp; ML — the dual
-                    tracks of his life began to converge. In his first year he became the
-                    unofficial creative engine for college events, and in the second
-                    semester he bought his first DJ console, fulfilling a wish he had
-                    carried since the eleventh standard.
+                    At Vel Tech University — pursuing a B.Tech in AI &amp; ML — another side of his
+                    thinking began to grow. Technology introduced him to systems, workflows, and
+                    structured problem-solving, while college culturals pulled him deeper into live
+                    events. In his first year he began training as a DJ, carrying forward a dream
+                    held since school. By his second year he was performing across campus events
+                    while simultaneously handling stage coordination, production planning, creative
+                    direction, artist management, and backstage execution. He became one of the
+                    unofficial creative forces behind major cultural events inside the university.
                   </p>
                   <p>
-                    The turning points came in rapid succession.{' '}
-                    <strong className="text-ink">Lavaza 2024</strong> — three consecutive
-                    nights of concerts (Thaman, Ram Miriyala, DJ Gautham) inside a
-                    serious production machine. <strong className="text-ink">March 2025</strong> —
-                    on stage as host for the audio launch of{' '}
-                    <em>Veera Dheera Sooran</em> alongside Vikram, SJ Suryah and GV
-                    Prakash. <strong className="text-ink">Lavaza 2025</strong> — console
-                    DJ across all three nights on L‑Acoustics line arrays, a DiGiCo SD338
-                    console, and a GrandMA3 lighting desk. On the third night, immediately
-                    after Karthick Live, he played his first 20,000+ crowd. That moment
-                    closed one chapter and opened another.
+                    That understanding deepened through{' '}
+                    <strong className="text-ink">Lavaza 2024</strong>,{' '}
+                    <strong className="text-ink">the Veera Dheera Sooran audio launch</strong>{' '}
+                    (on stage alongside Vikram, SJ Suryah, GV Prakash),{' '}
+                    <strong className="text-ink">Lavaza 2025</strong>,{' '}
+                    <strong className="text-ink">the Anirudh audio launch in 2026</strong>, and{' '}
+                    <strong className="text-ink">Lavaza 2026</strong>. Working alongside major
+                    artists exposed him to the pressure, discipline, and synchronization required
+                    behind large-scale live experiences — how backstage precision creates
+                    front-stage magic.
                   </p>
                   <p>
-                    On <strong className="text-ink">15 October 2025</strong> — his
-                    birthday — Aurastic Productions was launched. Every skill from a
-                    decade of learning — dance, photography, editing, audio mixing,
-                    visual design, DJing, live production, creative direction — came
-                    together under one banner, held by one person capable of stepping
-                    into any station on the ground when the moment demands it.
+                    Lavaza 2025 became the defining turning point. Performing as{' '}
+                    <strong className="text-ink">DJ Dwara</strong> across all three nights on
+                    L-Acoustics, DiGiCo SD338, and GrandMA3, he played in front of more than
+                    twenty thousand people on the final night — immediately after Karthick Live.
+                    That moment permanently changed the scale of his vision.
                   </p>
-                  <p className="text-violet-200 italic-serif">
-                    “Aurastic is not led from behind a desk. The founder is on the
-                    ground, on every major event, holding the aura intact.”
+                  <p>
+                    One realisation became impossible to ignore: dance, visuals, editing, DJing,
+                    stage flow, production, technology, creative direction, and crowd psychology
+                    were never separate worlds. They were all connected by one invisible purpose
+                    — creating human feeling. That realisation became{' '}
+                    <strong className="text-ink">Aurastic Productions</strong>, officially launched
+                    on 15 October 2025.
+                  </p>
+                  <p className="italic-serif text-violet-200/90 leading-[1.75]" style={{ fontSize: 'clamp(16px, 1.1vw, 18px)' }}>
+                    “People may forget the schedule, the stage, or the equipment — but they
+                    never forget how an experience made them feel. Leadership at Aurastic is
+                    defined by presence, not distance.”
                   </p>
                 </div>
 
-                <div className="mt-7 flex flex-wrap gap-2">
-                  {[
-                    'B.Tech · AI & ML · Veltech',
-                    'Audio Engineer',
-                    'Lighting Programmer',
-                    'Visual Designer',
-                    'Console DJ',
-                    'Photographer',
-                    'Cinematographer',
-                  ].map((t) => (
-                    <span
-                      key={t}
-                      className="px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-full border border-white/[0.22] text-[12px] sm:text-[13px] font-medium text-violet-200 bg-violet-500/[0.06]"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
               </div>
             </div>
           </Reveal>
         </div>
       </section>
+
+      
 
       {/* ─────────── The Team grid ─────────── */}
       <section id="team" className="py-20 sm:py-24 lg:py-[120px]">
@@ -236,7 +288,7 @@ export default function TeamPage() {
             title={
               <>
                 Specialists holding{' '}
-                <span className="italic-serif text-gradient-magenta">every craft.</span>
+                <span className="font-display text-gradient-magenta">every craft.</span>
               </>
             }
             lede="Aurastic grows the team in direct proportion to event volume — not a big team, a regular team, regularly paid, kept competitive with the best in the industry. Roles below are being filled now."
@@ -258,7 +310,7 @@ export default function TeamPage() {
                     className="absolute inset-0 pointer-events-none opacity-40"
                     style={{
                       background: m.filled
-                        ? 'radial-gradient(ellipse 70% 60% at 0% 0%, rgba(232,121,249,0.20), transparent 60%)'
+                        ? 'radial-gradient(ellipse 70% 60% at 0% 0%, rgba(124,58,237,0.20), transparent 60%)'
                         : 'radial-gradient(ellipse 60% 50% at 100% 0%, rgba(139,92,246,0.16), transparent 60%)',
                     }}
                   />
@@ -276,12 +328,13 @@ export default function TeamPage() {
                           m.filled ? 'text-violet-100' : 'text-violet-300/40'
                         }`}
                       >
-                        {(m.name ?? m.role)
-                          .split(/\s+/)
-                          .slice(0, 2)
-                          .map((w) => w[0])
-                          .join('')
-                          .toUpperCase()}
+                        {m.badge ||
+                          (m.name ?? m.role)
+                            .split(/\s+/)
+                            .slice(0, 2)
+                            .map((w) => w[0])
+                            .join('')
+                            .toUpperCase()}
                       </span>
                     </div>
 
@@ -330,7 +383,7 @@ export default function TeamPage() {
                         className={`w-2 h-2 rounded-full ${
                           m.filled
                             ? 'bg-violet-300 shadow-[0_0_10px_#a78bfa]'
-                            : 'bg-magenta/70 shadow-[0_0_10px_#e879f9] animate-[pulse_2s_ease-in-out_infinite]'
+                            : 'bg-violet-400 shadow-[0_0_10px_#7C3AED] animate-[pulse_2s_ease-in-out_infinite]'
                         }`}
                       />
                     </div>
@@ -350,7 +403,7 @@ export default function TeamPage() {
             title={
               <>
                 Six values.{' '}
-                <span className="italic-serif text-gradient-magenta">Non‑negotiable.</span>
+                <span className="font-display text-gradient-magenta">Non‑negotiable.</span>
               </>
             }
             lede="These were not invented. They were extracted from how Aurastic has already been built and how it already operates. They are the spine of every decision."
@@ -393,7 +446,7 @@ export default function TeamPage() {
                 className="absolute inset-0 pointer-events-none"
                 style={{
                   background:
-                    'radial-gradient(ellipse 60% 80% at 50% 0%, rgba(232,121,249,0.2), transparent 60%)',
+                    'radial-gradient(ellipse 60% 80% at 50% 0%, rgba(124,58,237,0.2), transparent 60%)',
                 }}
               />
               <div className="relative">
@@ -405,7 +458,7 @@ export default function TeamPage() {
                   style={{ fontSize: 'clamp(28px, 3.6vw, 56px)' }}
                 >
                   Join the{' '}
-                  <span className="italic-serif text-gradient-magenta">crew.</span>
+                  <span className="font-display text-gradient-magenta">crew.</span>
                 </h3>
                 <p
                   className="mt-5 max-w-[58ch] mx-auto text-ink-muted leading-[1.65]"
@@ -492,7 +545,7 @@ function FounderPortrait() {
         <circle cx={150} cy={170} r={48} />
         <path d="M80 400 Q80 260 150 245 Q220 260 220 400 Z" />
       </g>
-      <g stroke="#e879f9" strokeOpacity={0.7} strokeWidth={2} fill="none">
+      <g stroke="#7C3AED" strokeOpacity={0.7} strokeWidth={2} fill="none">
         <path d="M102 170 Q102 130 150 125" />
         <path d="M198 170 Q198 130 150 125" opacity={0.4} />
         <path d="M82 285 Q82 260 120 248" />
@@ -506,3 +559,4 @@ function FounderPortrait() {
     </svg>
   );
 }
+

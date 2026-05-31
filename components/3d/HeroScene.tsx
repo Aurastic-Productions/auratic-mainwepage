@@ -2,7 +2,7 @@
 
 import { Suspense, useMemo, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Environment, Float, Sparkles, MeshReflectorMaterial } from '@react-three/drei';
+import { Environment, Float, Sparkles, MeshReflectorMaterial, useTexture } from '@react-three/drei';
 import { EffectComposer, Bloom, Vignette, ChromaticAberration } from '@react-three/postprocessing';
 import { BlendFunction } from 'postprocessing';
 import * as THREE from 'three';
@@ -163,6 +163,7 @@ function LEDWall() {
       uTime: { value: 0 },
       uColorA: { value: new THREE.Color('#8b5cf6') },
       uColorB: { value: new THREE.Color('#e879f9') },
+      uColorC: { value: new THREE.Color('#3b0764') },
     }),
     [],
   );
@@ -174,60 +175,115 @@ function LEDWall() {
   });
 
   return (
-    <mesh position={[0, 3, -4]} receiveShadow>
-      <planeGeometry args={[12, 5, 1, 1]} />
-      <shaderMaterial
-        ref={matRef}
-        uniforms={uniforms}
-        vertexShader={`
-          varying vec2 vUv;
-          void main() {
-            vUv = uv;
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-          }
-        `}
-        fragmentShader={`
-          uniform float uTime;
-          uniform vec3 uColorA;
-          uniform vec3 uColorB;
-          varying vec2 vUv;
+    <group>
+      {/* Main LED panel — wider and shorter */}
+      <mesh position={[0, 1.8, -4]} receiveShadow>
+        <planeGeometry args={[22, 6, 1, 1]} />
+        <shaderMaterial
+          ref={matRef}
+          uniforms={uniforms}
+          vertexShader={`
+            varying vec2 vUv;
+            void main() {
+              vUv = uv;
+              gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            }
+          `}
+          fragmentShader={`
+            uniform float uTime;
+            uniform vec3 uColorA;
+            uniform vec3 uColorB;
+            uniform vec3 uColorC;
+            varying vec2 vUv;
 
-          // Classic 2D noise
-          float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
-          float noise(vec2 p) {
-            vec2 i = floor(p);
-            vec2 f = fract(p);
-            vec2 u = f * f * (3.0 - 2.0 * f);
-            return mix(mix(hash(i + vec2(0,0)), hash(i + vec2(1,0)), u.x),
-                       mix(hash(i + vec2(0,1)), hash(i + vec2(1,1)), u.x), u.y);
-          }
+            float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1,311.7))) * 43758.5453); }
+            float noise(vec2 p) {
+              vec2 i = floor(p); vec2 f = fract(p);
+              vec2 u = f*f*(3.0-2.0*f);
+              return mix(mix(hash(i),hash(i+vec2(1,0)),u.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),u.x),u.y);
+            }
 
-          void main() {
-            vec2 uv = vUv;
-            // Animated flowing noise bands
-            float n = noise(vec2(uv.x * 3.0 + uTime * 0.25, uv.y * 2.0 - uTime * 0.2));
-            float n2 = noise(vec2(uv.x * 8.0 - uTime * 0.5, uv.y * 5.0 + uTime * 0.3));
-            float m = smoothstep(0.3, 0.9, n + n2 * 0.3);
+            // Diagonal beam sweep
+            float beam(vec2 uv, float angle, float width, float t) {
+              float s = sin(angle); float c = cos(angle);
+              float d = abs(uv.x * c - uv.y * s - fract(t) * 2.0 + 0.5);
+              return smoothstep(width, 0.0, d) * 0.6;
+            }
 
-            // Scanline effect for LED feel
-            float scan = sin(uv.y * 300.0) * 0.04 + 0.96;
+            // Concentric ring pulse
+            float rings(vec2 uv, float t) {
+              vec2 center = vec2(0.5, 0.5);
+              float dist = length(uv - center) * 2.0;
+              return smoothstep(0.05, 0.0, abs(fract(dist - t * 0.4) - 0.5)) * 0.5;
+            }
 
-            // Pixel grid for LED texture
-            vec2 grid = fract(uv * vec2(120.0, 50.0));
-            float cell = smoothstep(0.85, 1.0, grid.x) + smoothstep(0.85, 1.0, grid.y);
-            float dim = 1.0 - cell * 0.5;
+            // Horizontal scan bars
+            float scanBars(vec2 uv, float t) {
+              float bar = sin((uv.y - t * 0.15) * 18.0) * 0.5 + 0.5;
+              return smoothstep(0.6, 1.0, bar) * 0.25;
+            }
 
-            vec3 col = mix(uColorA, uColorB, m) * scan * dim;
+            // Diamond / cross pattern
+            float diamond(vec2 uv, float t) {
+              vec2 c = vec2(0.5);
+              vec2 d = abs(uv - c);
+              float shape = smoothstep(0.32 + sin(t*0.5)*0.04, 0.30, d.x + d.y);
+              float inner = smoothstep(0.18, 0.16, d.x + d.y);
+              return (shape - inner) * 0.5;
+            }
 
-            // Vignette inside panel
-            float vig = smoothstep(1.2, 0.4, length(uv - 0.5));
-            col *= vig * 0.8;
+            void main() {
+              vec2 uv = vUv;
 
-            gl_FragColor = vec4(col, 1.0);
-          }
-        `}
-      />
-    </mesh>
+              // Base flowing noise
+              float n  = noise(vec2(uv.x*3.0 + uTime*0.2,  uv.y*2.0 - uTime*0.15));
+              float n2 = noise(vec2(uv.x*7.0 - uTime*0.4,  uv.y*5.0 + uTime*0.25));
+              float base = smoothstep(0.2, 0.9, n + n2*0.35);
+
+              // Layered design elements
+              float b1 = beam(uv, 0.4,  0.04, uTime * 0.12);
+              float b2 = beam(uv, -0.4, 0.03, uTime * 0.09 + 0.5);
+              float r  = rings(uv, uTime);
+              float sb = scanBars(uv, uTime);
+              float dm = diamond(uv, uTime);
+
+              // Pixel grid for LED texture
+              vec2 grid = fract(uv * vec2(130.0, 55.0));
+              float cell = smoothstep(0.88, 1.0, grid.x) + smoothstep(0.88, 1.0, grid.y);
+              float dim = 1.0 - cell * 0.45;
+
+              // Compose colour
+              vec3 col = mix(uColorC, uColorA, base);
+              col = mix(col, uColorB, b1 + b2 + r + dm);
+              col += vec3(0.6, 0.4, 1.0) * sb;
+              col *= dim;
+
+              // Scanline flicker
+              float scan = sin(uv.y * 320.0) * 0.03 + 0.97;
+              col *= scan;
+
+              // Inner vignette
+              float vig = smoothstep(1.3, 0.35, length(uv - 0.5));
+              col *= vig * 0.85 + 0.15;
+
+              gl_FragColor = vec4(col, 1.0);
+            }
+          `}
+        />
+      </mesh>
+
+      {/* Thin frame border around the panel */}
+      <lineSegments position={[0, 1.8, -3.98]}>
+        <edgesGeometry args={[new THREE.PlaneGeometry(22.15, 6.15)]} />
+        <lineBasicMaterial color="#c4b5fd" transparent opacity={0.25} />
+      </lineSegments>
+
+      {/* Bottom edge glow strip */}
+      <mesh position={[0, -1.2, -3.95]}>
+        <planeGeometry args={[22, 0.06]} />
+        <meshBasicMaterial color="#e879f9" toneMapped={false} transparent opacity={0.7} />
+      </mesh>
+    </group>
   );
 }
 
@@ -245,11 +301,6 @@ function Stage({ quality }: { quality: Quality }) {
       <mesh position={[0, 0.15, 0]} receiveShadow castShadow>
         <cylinderGeometry args={[2.2, 2.4, 0.3, cylinderSegs]} />
         <meshStandardMaterial color="#0a0514" metalness={0.6} roughness={0.4} />
-      </mesh>
-      {/* Rim glow */}
-      <mesh position={[0, 0.31, 0]}>
-        <torusGeometry args={[2.2, 0.03, 16, torusSegs]} />
-        <meshBasicMaterial color="#e879f9" toneMapped={false} />
       </mesh>
 
       {/* Reflective floor */}
@@ -277,45 +328,81 @@ function Stage({ quality }: { quality: Quality }) {
    The floating Aurastic mark, suspended in the lighting
    --------------------------------------------------------------- */
 function HoverMark() {
-  const arrowShape = useMemo(() => {
-    const s = new THREE.Shape();
-    s.moveTo(0, 0.4);
-    s.lineTo(-0.3, -0.1);
-    s.lineTo(-0.1, -0.1);
-    s.lineTo(-0.1, -0.4);
-    s.lineTo(0.1, -0.4);
-    s.lineTo(0.1, -0.1);
-    s.lineTo(0.3, -0.1);
-    s.closePath();
-    return s;
-  }, []);
+  const logoTexture = useTexture('/brand/aurastic-mark-square.png');
+  logoTexture.anisotropy = 8;
+  logoTexture.colorSpace = THREE.SRGBColorSpace;
 
   return (
-    <Float speed={1.4} rotationIntensity={0.25} floatIntensity={0.6} floatingRange={[0, 0.3]}>
-      <group position={[0, 2.2, 0]}>
-        {/* Diamond frame rotated 45° */}
-        <mesh rotation={[0, 0, Math.PI / 4]}>
-          <boxGeometry args={[1.3, 1.3, 0.1]} />
-          <meshStandardMaterial
-            color="#2b1065"
-            metalness={0.7}
-            roughness={0.2}
-            emissive="#8b5cf6"
-            emissiveIntensity={0.5}
-          />
+    // Sits on top of the stage platform (platform top = 0.3, so y = 0.3)
+    <Float speed={1.2} rotationIntensity={0.1} floatIntensity={0.25} floatingRange={[0, 0.15]}>
+      <group position={[0, 0.55, 0]}>
+        {/* Pedestal base */}
+        <mesh castShadow receiveShadow>
+          <cylinderGeometry args={[0.35, 0.4, 0.12, 32]} />
+          <meshStandardMaterial color="#12082a" metalness={0.8} roughness={0.2} emissive="#8b5cf6" emissiveIntensity={0.15} />
         </mesh>
-        {/* Bold play-arrow — the Aurastic mark */}
-        <mesh>
-          <shapeGeometry args={[arrowShape]} />
-          <meshStandardMaterial
-            color="#ffffff"
-            emissive="#ddd6fe"
-            emissiveIntensity={0.8}
+        {/* Logo plane standing upright on the pedestal */}
+        <mesh position={[0, 0.7, 0]} castShadow>
+          <planeGeometry args={[1.6, 1.6]} />
+          <meshBasicMaterial
+            map={logoTexture}
+            transparent
             toneMapped={false}
           />
         </mesh>
+        {/* Subtle glow disc under the logo */}
+        <mesh position={[0, 0.07, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+          <circleGeometry args={[0.5, 32]} />
+          <meshBasicMaterial color="#8b5cf6" transparent opacity={0.18} toneMapped={false} />
+        </mesh>
       </group>
     </Float>
+  );
+}
+
+/* ---------------------------------------------------------------
+   Suspended Line Array Speakers
+   --------------------------------------------------------------- */
+function SpeakerArray({ position, rotation }: { position: [number, number, number]; rotation?: [number, number, number] }) {
+  return (
+    <group position={position} rotation={rotation || [0, 0, 0]}>
+      {/* Suspension Cables going up to the truss (truss is at y ~ 6.8, base is at 4.0, length = 2.8) */}
+      <mesh position={[-0.2, 1.4, 0]}>
+        <cylinderGeometry args={[0.01, 0.01, 2.8, 8]} />
+        <meshStandardMaterial color="#444" roughness={0.4} metalness={0.8} />
+      </mesh>
+      <mesh position={[0.2, 1.4, 0]}>
+        <cylinderGeometry args={[0.01, 0.01, 2.8, 8]} />
+        <meshStandardMaterial color="#444" roughness={0.4} metalness={0.8} />
+      </mesh>
+
+      {/* Fly bumper / hanging bracket */}
+      <mesh position={[0, 0, 0]}>
+        <boxGeometry args={[0.85, 0.06, 0.5]} />
+        <meshStandardMaterial color="#111" metalness={0.8} roughness={0.3} />
+      </mesh>
+      
+      {/* Curved Speaker boxes */}
+      {Array.from({ length: 8 }).map((_, i) => (
+        <group key={i} position={[0, -0.15 - i * 0.28, Math.sin(i * 0.15) * 0.15]} rotation={[i * 0.06, 0, 0]}>
+          {/* Main Box */}
+          <mesh>
+            <boxGeometry args={[0.8, 0.24, 0.45]} />
+            <meshStandardMaterial color="#0a0a0a" metalness={0.5} roughness={0.8} />
+          </mesh>
+          {/* Front Grill area */}
+          <mesh position={[0, 0, 0.226]}>
+            <planeGeometry args={[0.75, 0.2]} />
+            <meshStandardMaterial color="#1a1a1a" metalness={0.6} roughness={0.9} />
+          </mesh>
+          {/* Emissive accents */}
+          <mesh position={[0.35, 0, 0.227]}>
+            <circleGeometry args={[0.01, 8]} />
+            <meshBasicMaterial color="#e879f9" />
+          </mesh>
+        </group>
+      ))}
+    </group>
   );
 }
 
@@ -334,13 +421,13 @@ export default function HeroScene({
 }) {
   // Adaptive settings
   const dpr: [number, number] =
-    quality === 'high' ? [1, 2] : quality === 'medium' ? [1, 1.5] : [0.75, 1];
+    quality === 'high' ? [1, 1.5] : quality === 'medium' ? [1, 1.2] : [0.75, 1];
   const enableShadows = quality !== 'low';
-  const sparkleMain = quality === 'high' ? 80 : quality === 'medium' ? 40 : 16;
-  const sparkleAccent = quality === 'high' ? 30 : quality === 'medium' ? 15 : 6;
-  const multisampling = quality === 'high' ? 4 : quality === 'medium' ? 2 : 0;
+  const sparkleMain = quality === 'high' ? 40 : quality === 'medium' ? 20 : 8;
+  const sparkleAccent = quality === 'high' ? 15 : quality === 'medium' ? 8 : 0;
+  const multisampling = quality === 'high' ? 2 : 0;
   const showPostFX = quality !== 'low';
-  const bloomIntensity = quality === 'high' ? 1.4 : 1.0;
+  const bloomIntensity = quality === 'high' ? 1.0 : 0.7;
 
   // Spotlight intensity & count — drop 2 lights on 'low' for perf
   const spotlights =
@@ -352,8 +439,6 @@ export default function HeroScene({
       : [
           { pos: [-4, 7, 2] as [number, number, number], color: '#c4b5fd', phase: 0, speed: 0.45, intensity: 50 },
           { pos: [4, 7, 2] as [number, number, number], color: '#e879f9', phase: Math.PI / 2, speed: 0.5, intensity: 50 },
-          { pos: [-2.5, 7, -1] as [number, number, number], color: '#a78bfa', phase: Math.PI, speed: 0.35, intensity: 40 },
-          { pos: [2.5, 7, -1] as [number, number, number], color: '#8b5cf6', phase: Math.PI * 1.5, speed: 0.4, intensity: 40 },
         ];
 
   return (
@@ -367,7 +452,6 @@ export default function HeroScene({
         stencil: false,
       }}
       camera={{ position: [0, 2, 10], fov: 38 }}
-      // Pause rendering when scrolled past — big perf win
       frameloop="always"
     >
       <color attach="background" args={['#050209']} />
@@ -392,7 +476,7 @@ export default function HeroScene({
           />
         ))}
 
-        {/* Back uplight for rim on LED wall */}
+        {/* Back uplight for LED wall */}
         <pointLight position={[0, 1, -3]} intensity={8} color="#e879f9" distance={6} />
 
         {/* Scene content */}
@@ -432,3 +516,5 @@ export default function HeroScene({
     </Canvas>
   );
 }
+
+

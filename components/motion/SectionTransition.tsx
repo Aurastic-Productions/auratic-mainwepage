@@ -1,57 +1,43 @@
 'use client';
 
-import { ReactNode, useRef } from 'react';
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 
 type Props = {
   children: ReactNode;
   className?: string;
-  /** how much vertical drift on enter/exit, in px */
-  drift?: number;
 };
 
 /**
- * Wraps a section so it gently fades + drifts in as it enters the viewport
- * and softens as it leaves — creating a continuous, scroll-tied transition
- * between consecutive sections.
+ * Lightweight section fade-in using IntersectionObserver.
+ * No scroll listeners, no useTransform — zero JS per frame.
  */
-export default function SectionTransition({
-  children,
-  className,
-  drift = 60,
-}: Props) {
+export default function SectionTransition({ children, className }: Props) {
   const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
+  const [visible, setVisible] = useState(false);
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
-
-  // Fade up on enter, slight fade out on exit
-  const opacity = useTransform(
-    scrollYProgress,
-    [0, 0.18, 0.82, 1],
-    reduce ? [1, 1, 1, 1] : [0, 1, 1, 0.6],
-  );
-  const y = useTransform(
-    scrollYProgress,
-    [0, 0.18, 0.82, 1],
-    reduce ? [0, 0, 0, 0] : [drift, 0, 0, -drift * 0.4],
-  );
-  const scale = useTransform(
-    scrollYProgress,
-    [0, 0.18, 0.82, 1],
-    reduce ? [1, 1, 1, 1] : [0.985, 1, 1, 0.99],
-  );
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
+      { threshold: 0.06 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
 
   return (
-    <motion.div
+    <div
       ref={ref}
-      style={{ opacity, y, scale, willChange: 'opacity, transform' }}
       className={className}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateY(0)' : 'translateY(32px)',
+        transition: 'opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1)',
+        willChange: 'opacity, transform',
+      }}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

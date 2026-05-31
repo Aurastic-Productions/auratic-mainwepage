@@ -27,12 +27,35 @@
   --font-mark:    var(--font-slant), 'Bebas Neue', 'Impact', sans-serif;
   --font-serif:   var(--font-instrument), Georgia, serif;
 
-  --bg-void: #050209;
-  --violet-500: #8b5cf6;
-  --magenta: #e879f9;
-  --glow: #b794ff;
-  --border: rgba(199, 180, 253, 0.10);
-  --border-strong: rgba(199, 180, 253, 0.22);
+  --bg-void: #07050D;
+
+  /* ── Official Aurastic Brand Colors ── */
+  /* Primary */
+  --aurastic-primary:  #4E2E88;
+  --aurastic-deep:     #281C44;
+  --aurastic-secondary:#3A2E72;
+  --aurastic-tertiary: #6C59E2;
+
+  /* AI palette */
+  --ai-deep:    #400898;
+  --ai-primary: #5525E8;
+  --ai-glow:    #7700E0;
+
+  /* Light accent */
+  --light-purple: #B58FFF;
+
+  /* Productions gradient: #4E2E88 → #281C44 */
+  --gradient-productions: linear-gradient(135deg, #4E2E88, #281C44);
+
+  /* AI gradient: #400898 → #5525E8 → #7700E0 */
+  --gradient-ai: linear-gradient(135deg, #400898, #5525E8, #7700E0);
+
+  /* Legacy aliases — kept for backward compat with existing components */
+  --violet-500: #6C59E2;
+  --magenta:    #B58FFF;
+  --glow:       #7700E0;
+  --border:       rgba(78, 46, 136, 0.20);
+  --border-strong: rgba(78, 46, 136, 0.40);
 
   font-size: clamp(16px, 0.9vw + 12px, 20px);
 }
@@ -120,9 +143,9 @@ body::before {
   pointer-events: none;
   z-index: 0;
   background:
-    radial-gradient(ellipse 60% 80% at 15% 0%, rgba(139, 92, 246, 0.22), transparent 55%),
-    radial-gradient(ellipse 55% 70% at 85% 10%, rgba(232, 121, 249, 0.10), transparent 60%),
-    radial-gradient(ellipse 80% 60% at 50% 120%, rgba(91, 33, 182, 0.16), transparent 60%);
+    radial-gradient(ellipse 60% 80% at 15% 0%, rgba(78, 46, 136, 0.30), transparent 55%),
+    radial-gradient(ellipse 55% 70% at 85% 10%, rgba(64, 8, 152, 0.15), transparent 60%),
+    radial-gradient(ellipse 80% 60% at 50% 120%, rgba(40, 28, 68, 0.25), transparent 60%);
   animation: ambient-drift 28s ease-in-out infinite alternate;
   will-change: transform, opacity;
 }
@@ -146,19 +169,37 @@ section {
   z-index: 2;
 }
 
-/* Text gradients */
+/* Text gradients — using official brand palette */
 .text-gradient {
-  background: linear-gradient(180deg, #fff, #c4b5fd);
+  background: linear-gradient(180deg, #fff, #B58FFF);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
 .text-gradient-magenta {
-  background: linear-gradient(180deg, #c4b5fd, #e879f9);
+  background: linear-gradient(135deg, #B58FFF, #7700E0);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* Productions gradient utility */
+.bg-gradient-productions {
+  background: linear-gradient(135deg, #4E2E88, #281C44);
+}
+
+/* AI gradient utility */
+.bg-gradient-ai {
+  background: linear-gradient(135deg, #400898, #5525E8, #7700E0);
+}
+
+/* Brand accent border */
+.border-brand {
+  border-color: rgba(78, 46, 136, 0.35);
+}
+.border-brand-strong {
+  border-color: rgba(108, 89, 226, 0.5);
 }
 
 .italic-serif {
@@ -226,7 +267,7 @@ p { margin: 0; font-family: var(--font-body); }
   font-weight: 700;
   letter-spacing: 0.005em;
   line-height: 0.92;
-  font-size: clamp(56px, 11vw, 168px);
+  font-size: clamp(56px, 11vw, 134px);
   text-transform: uppercase;
 }
 .t-display-2 {
@@ -234,7 +275,7 @@ p { margin: 0; font-family: var(--font-body); }
   font-weight: 700;
   letter-spacing: 0.005em;
   line-height: 0.98;
-  font-size: clamp(40px, 6vw, 96px);
+  font-size: clamp(40px, 6vw, 76px);
   text-transform: uppercase;
 }
 .t-display-3 {
@@ -242,7 +283,7 @@ p { margin: 0; font-family: var(--font-body); }
   font-weight: 700;
   letter-spacing: 0.01em;
   line-height: 1.02;
-  font-size: clamp(28px, 3.4vw, 52px);
+  font-size: clamp(32px, 4vw, 58px);
   text-transform: uppercase;
 }
 .t-h4 {
@@ -284,11 +325,11 @@ p { margin: 0; font-family: var(--font-body); }
 }
 .t-kicker {
   font-family: var(--font-tagline);
-  font-size: clamp(10.5px, 0.78vw, 12px);
+  font-size: clamp(14px, 1.05vw, 17px);
   font-weight: 400;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: #c4b5fd;
+  color: #e8deff;
 }
 .t-num {
   font-family: var(--font-num);
@@ -331,15 +372,25 @@ p { margin: 0; font-family: var(--font-body); }
 /* Editorial card — the canonical surface for content cards */
 .surface-card {
   border-radius: clamp(18px, 1.6vw, 24px);
-  border: 1px solid rgba(199, 180, 253, 0.10);
-  background: linear-gradient(180deg, rgba(23, 16, 58, 0.42), rgba(10, 5, 20, 0.65));
+  border: 1px solid rgba(78, 46, 136, 0.22);
+  background: linear-gradient(180deg, rgba(40, 28, 68, 0.42), rgba(7, 5, 13, 0.65));
   backdrop-filter: blur(8px);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.surface-card:hover {
+  border-color: rgba(108, 89, 226, 0.38);
+  box-shadow: 0 8px 32px -8px rgba(78, 46, 136, 0.22);
 }
 .surface-card-strong {
   border-radius: clamp(18px, 1.6vw, 24px);
-  border: 1px solid rgba(199, 180, 253, 0.18);
-  background: linear-gradient(180deg, rgba(31, 21, 80, 0.48), rgba(10, 5, 20, 0.7));
+  border: 1px solid rgba(78, 46, 136, 0.35);
+  background: linear-gradient(180deg, rgba(58, 46, 114, 0.48), rgba(7, 5, 13, 0.70));
   backdrop-filter: blur(10px);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.surface-card-strong:hover {
+  border-color: rgba(108, 89, 226, 0.50);
+  box-shadow: 0 8px 40px -8px rgba(78, 46, 136, 0.28);
 }
 
 /* Prevent orphaned text on narrow widths — break long words gracefully */
@@ -435,4 +486,40 @@ img, video, svg, canvas {
 canvas {
   touch-action: pan-y;
   -webkit-tap-highlight-color: transparent;
+}
+
+@keyframes gradient-flow {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ── Brand font enforcement ── */
+
+/* All t-num elements always use Exo */
+.t-num,
+[class*="font-num"] {
+  font-family: var(--font-exo) !important;
+  font-weight: 700;
+  font-feature-settings: 'lnum', 'tnum';
+}
+
+/* Section divider labels always use BankGothic */
+[data-label] {
+  font-family: var(--font-bankgothic) !important;
+  letter-spacing: 0.4em;
+}
+
+/* Biko gradient lede — reusable utility */
+.lede-gradient {
+  font-family: var(--font-biko);
+  font-size: clamp(17px, 1.4vw, 22px);
+  font-weight: 500;
+  line-height: 1.6;
+  background: linear-gradient(90deg, #B58FFF 0%, #7700E0 50%, #B58FFF 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-flow 4s linear infinite;
+  display: block;
 }

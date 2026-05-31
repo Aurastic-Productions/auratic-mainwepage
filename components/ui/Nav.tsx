@@ -3,22 +3,24 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const LINKS = [
-  { href: '/#story',    label: 'About' },
-  { href: '/#services', label: 'Services' },
-  { href: '/#process',  label: 'How It Works' },
-  { href: '/#work',     label: 'Work' },
-  { href: '/#team',     label: 'Team' },
-  { href: '/#contact',  label: 'Contact' },
+  { href: '/',             label: 'Production' },
+  { href: '/about',        label: 'About' },
+  { href: '/services',     label: 'What we do' },
+  { href: '/aurastic-ai',  label: 'Aurastic AI' },
+  { href: '/vision',       label: 'Vision & Mission' },
+  { href: '/team',         label: 'Our Team' },
+  { href: '/gallery',      label: 'Gallery' },
 ];
 
 export default function Nav() {
+  const pathname = usePathname();
   const [hidden,   setHidden]   = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [open,     setOpen]     = useState(false);
-  const [active,   setActive]   = useState('');
 
   /* Hide on scroll-down, show on scroll-up */
   useEffect(() => {
@@ -33,22 +35,8 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  /* Highlight active section via IntersectionObserver */
-  useEffect(() => {
-    const ids = LINKS.map((l) => l.href.replace('/#', ''));
-    const observers: IntersectionObserver[] = [];
-    ids.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActive(id); },
-        { rootMargin: '-40% 0px -55% 0px' }
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
-    return () => observers.forEach((o) => o.disconnect());
-  }, []);
+  // Active state is now managed by usePathname directly
+  const active = pathname;
 
   /* Close mobile menu on Escape */
   useEffect(() => {
@@ -70,7 +58,7 @@ export default function Nav() {
           <div
             className={`
               flex items-center
-              pl-4 pr-3 py-2 sm:pl-5 sm:pr-3.5 sm:py-2.5
+              pl-4 pr-3 py-1.5 sm:pl-5 sm:pr-3.5 sm:py-1.5
               rounded-full
               border transition-all duration-500
               ${scrolled
@@ -82,16 +70,16 @@ export default function Nav() {
             {/* ── Logo ── */}
             <Link
               href="#top"
-              className="shrink-0 flex items-center"
+              className="shrink-0 flex items-center -my-3 sm:-my-4"
               aria-label="Aurastic Productions home"
             >
               <Image
                 src="/brand/aurastic-white.png"
                 alt="Aurastic Productions"
-                width={260}
-                height={65}
+                width={360}
+                height={90}
                 priority
-                className="h-12 sm:h-14 w-auto opacity-90 hover:opacity-100 transition-opacity duration-300"
+                className="h-16 sm:h-20 w-auto opacity-90 hover:opacity-100 transition-opacity duration-300"
               />
             </Link>
 
@@ -99,8 +87,7 @@ export default function Nav() {
             <nav aria-label="Primary" className="hidden xl:flex flex-1 justify-center">
               <ul className="flex items-center gap-1">
                 {LINKS.map((l) => {
-                  const id = l.href.replace('/#', '');
-                  const isActive = active === id;
+                  const isActive = active === l.href;
                   return (
                     <li key={l.href}>
                       <Link
@@ -242,3 +229,5 @@ export default function Nav() {
     </>
   );
 }
+
+

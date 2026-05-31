@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
-import { Instrument_Serif } from 'next/font/google';
 import './globals.css';
 import SmoothScroll from '@/components/ui/SmoothScroll';
 import Loader from '@/components/ui/Loader';
 import Nav from '@/components/ui/Nav';
 import Footer from '@/components/ui/Footer';
+import Contact from '@/components/sections/Contact';
 import AuraMode from '@/components/ui/AuraMode';
 import ScrollProgress from '@/components/motion/ScrollProgress';
 
@@ -85,14 +85,6 @@ const exo = localFont({
   display: 'swap',
 });
 
-const instrument = Instrument_Serif({
-  subsets: ['latin'],
-  weight: ['400'],
-  style: ['normal', 'italic'],
-  variable: '--font-instrument',
-  display: 'swap',
-});
-
 export const metadata: Metadata = {
   title: 'AURASTIC — AI Event Management & Productions',
   description:
@@ -145,21 +137,26 @@ export default function RootLayout({
     bebas.variable,
     rubik.variable,
     exo.variable,
-    instrument.variable,
   ].join(' ');
 
   return (
     <html lang="en" className={fontVars}>
-      <body className="bg-void text-ink font-sans antialiased overflow-x-hidden">
+      <body className="bg-void text-ink font-sans antialiased overflow-x-hidden relative">
+        {/* Ambient drift background is handled by globals.css body::before */}
+        <div className="relative z-[10]">
+        
         <Loader />
         <ScrollProgress />
         <AuraMode />
         <SmoothScroll>
           <Nav />
-          <main>{children}</main>
+          <main className="flex flex-col min-h-screen">{children}</main>
+          <Contact />
           <Footer />
         </SmoothScroll>
+        </div>
       </body>
     </html>
   );
 }
+

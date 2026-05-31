@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import Magnetic from '@/components/motion/Magnetic';
 import RotatingWord from '@/components/motion/RotatingWord';
 import FloatingOrbs from '@/components/motion/FloatingOrbs';
@@ -22,7 +23,7 @@ export default function Hero() {
   return (
     <div
       ref={ref}
-      className="relative min-h-[100svh] w-full flex flex-col items-start justify-start pointer-events-none pt-[160px] sm:pt-[200px] pb-24 overflow-hidden"
+      className="relative min-h-[100svh] w-full flex flex-col items-start justify-start pointer-events-none pt-[160px] sm:pt-[200px] pb-24"
     >
       <FloatingOrbs />
       <motion.div
@@ -35,23 +36,36 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.6, duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col gap-1 sm:gap-2 md:gap-3 t-display-1 uppercase"
+            className="flex flex-col gap-1 sm:gap-2 md:gap-3 uppercase"
             style={{
               textShadow: '0 4px 60px rgba(5,2,9,0.9)',
+              fontFamily: 'var(--font-display)',
+              fontWeight: 700,
+              letterSpacing: '0.005em',
+              lineHeight: 0.92,
+              fontSize: 'clamp(38px, 7vw, 110px)',
             }}
           >
             <span className="block">Every event</span>
-            <span className="block">
-              deserves a perfect{' '}
-              <span className="relative inline-block text-gradient-magenta">
-                <RotatingWord words={WORDS} interval={3200} className="font-normal text-gradient-magenta" />
-                <span className="italic-serif font-normal lowercase tracking-wide">.</span>
-              </span>
+            <span className="block">deserves a perfect</span>
+            <span className="block overflow-visible normal-case" style={{ textShadow: 'none' }}>
+              <RotatingWord
+                words={WORDS}
+                interval={3200}
+                className="font-normal italic-serif"
+                style={{
+                  background: 'linear-gradient(135deg, #B58FFF, #7700E0)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  color: 'transparent',
+                  textShadow: 'none',
+                  display: 'inline-block',
+                  paddingRight: '0.15em',
+                }}
+              />
             </span>
-            <span className="block font-tagline text-violet-200 uppercase mt-6 sm:ml-4 tracking-[0.1em] text-[0.22em] leading-[1.3] opacity-80" style={{ maxWidth: '30ch' }}>
-              We create it. <br className="hidden sm:block" />
-              A New Era of Event Production
-            </span>
+
           </motion.h1>
 
           <motion.p
@@ -63,20 +77,13 @@ export default function Hero() {
           >
             Audio, lighting, LED, stage, SFX, media — designed and delivered as one artistic execution. 
             Twelve service sectors, one quotation, one team, one accountability.
+
+            <span className="block mt-6" style={{ fontFamily: 'var(--font-biko, "Biko", sans-serif)', fontSize: '1.2em', letterSpacing: '0.02em' }}>
+              #anArtisticproduction
+            </span>
           </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.5 }}
-            transition={{ delay: 2.5, duration: 1 }}
-            className="mt-8 t-meta uppercase tracking-[0.15em] flex items-center gap-4"
-          >
-            <span>Company Profile</span>
-            <span className="w-4 h-px bg-white/20" />
-            <span>South India</span>
-            <span className="w-4 h-px bg-white/20" />
-            <span>2026</span>
-          </motion.div>
+          
 
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -87,7 +94,7 @@ export default function Hero() {
             <Magnetic strength={0.25}>
               <Link
                 href="#contact"
-                className="inline-flex items-center gap-2 min-h-[52px] px-7 py-3.5 rounded-full bg-gradient-to-br from-violet-500 to-magenta text-white text-[14px] sm:text-[15px] font-semibold tracking-[0.005em] shadow-[0_0_0_1px_rgba(255,255,255,0.06)_inset,0_18px_40px_-12px_rgba(139,92,246,0.65)] mouse:hover:shadow-[0_22px_48px_-12px_rgba(232,121,249,0.6)] active:scale-[0.98] transition-shadow"
+                className="inline-flex items-center gap-2 min-h-[52px] px-7 py-3.5 rounded-full bg-gradient-to-br from-violet-500 to-magenta text-white text-[14px] sm:text-[15px] font-semibold tracking-[0.005em] shadow-[0_0_0_1px_rgba(255,255,255,0.06)_inset,0_18px_40px_-12px_rgba(139,92,246,0.65)] mouse:hover:shadow-[0_22px_48px_-12px_rgba(124,58,237,0.6)] active:scale-[0.98] transition-shadow"
               >
                 Book an event
                 <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
@@ -109,27 +116,20 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 2.7, duration: 1 }}
-            className="mt-12 sm:mt-16 grid grid-cols-3 gap-x-5 sm:gap-x-10 max-w-xl"
+            className="mt-12 sm:mt-16 flex flex-wrap gap-2 sm:gap-3"
           >
             {[
-              { v: '20+', l: 'Events delivered' },
-              { v: '₹10L+', l: 'Event turnover' },
-              { v: '12', l: 'Service sectors' },
-            ].map((m, i) => (
-              <div key={i} className="border-l border-white/[0.25] pl-4">
-                <strong
-                  className="block t-num text-gradient"
-                  style={{ fontSize: 'clamp(22px, 2.4vw, 36px)' }}
-                >
-                  {m.v}
-                </strong>
-                <span
-                  className="t-kicker !text-ink-faint mt-2 block"
-                  style={{ textShadow: '0 2px 10px rgba(5,2,9,0.8)' }}
-                >
-                  {m.l}
-                </span>
-              </div>
+              'Audio · Lighting · LED',
+              'Stage · SFX · Media',
+              'South India · Est. 2025',
+            ].map((tag, i) => (
+              <span
+                key={i}
+                className="px-4 py-2 rounded-full border border-white/[0.14] bg-white/[0.04] t-kicker !text-white !text-[12px] sm:!text-[13px] backdrop-blur-sm"
+                style={{ textShadow: '0 2px 10px rgba(5,2,9,0.8)' }}
+              >
+                {tag}
+              </span>
             ))}
           </motion.div>
         </div>
@@ -141,12 +141,10 @@ export default function Hero() {
           transition={{ delay: 3.6, duration: 1 }}
           className="absolute bottom-10 right-10 hidden lg:flex flex-col items-center gap-3 t-kicker !text-ink-muted pointer-events-auto"
         >
-          <span className="rotate-90 origin-center whitespace-nowrap pt-6">
-            scroll to explore
-          </span>
           <span className="w-px h-16 bg-gradient-to-b from-white/30 to-transparent" />
         </motion.div>
       </motion.div>
     </div>
   );
 }
+

@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import Reveal from '@/components/motion/Reveal';
 import SectionHead from '@/components/ui/SectionHead';
 
@@ -7,24 +8,15 @@ export default function Audience() {
   return (
     <section className="section-y">
       <div className="wrap">
-        <SectionHead
-          kicker="Events we deliver"
-          title={
-            <>
-              From institutional to{' '}
-              <span className="italic-serif text-gradient-magenta">deeply personal.</span>
-            </>
-          }
-          lede="Aurastic's framework adapts to the occasion while the standards remain constant. Two audiences. One operational engine."
-        />
+        {/* Section header removed as per new design */}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 items-stretch">
           <Reveal direction="left" distance={60}>
             <AudienceCard
               tag="Institutional & Corporate"
-              title="Colleges,"
+              title="Culturals &"
               titleEm="corporates"
-              titleAfter="& schools."
+          
               items={[
                 'College culturals & flagship fests',
                 'Annual days & inaugurations',
@@ -65,7 +57,8 @@ export default function Audience() {
               className="mt-4 font-display font-semibold tracking-[-0.02em] leading-[1.1]"
               style={{ fontSize: 'clamp(22px, 2.4vw, 36px)' }}
             >
-              Six months. Twenty‑plus events.{' '}
+              Eight months. Twenty‑plus events.{' '}
+              <br />
               <span className="italic-serif text-violet-300">A standard‑setting beginning.</span>
             </h3>
             <p
@@ -82,7 +75,7 @@ export default function Audience() {
                 'Vel Tech Multi Tech Engineering College',
                 'Vel Tech High Tech Engineering College',
                 'Vel Tech Ranga Sanku Arts College',
-                'Saveetha Medical College & Hospital',
+                
               ].map((c) => (
                 <span
                   key={c}
@@ -108,7 +101,7 @@ function AudienceCard({
   tag: string;
   title: string;
   titleEm?: string;
-  titleAfter?: string;
+  titleAfter?: React.ReactNode;
   items: string[];
   bgUrl: string;
 }) {
@@ -129,7 +122,7 @@ function AudienceCard({
       <span className="inline-flex self-start px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-white/[0.08] border border-white/[0.22] text-[10px] sm:text-[11px] tracking-[0.16em] sm:tracking-[0.18em] uppercase font-semibold">
         {tag}
       </span>
-      <div>
+      <div className="mt-6 sm:mt-8">
         <h3
           className="font-display font-bold tracking-[-0.025em]"
           style={{ fontSize: 'clamp(28px, 3.6vw, 56px)' }}
@@ -139,7 +132,7 @@ function AudienceCard({
           {titleAfter && <> {titleAfter}</>}
         </h3>
         <ul
-          className="mt-5 sm:mt-7 space-y-2.5 sm:space-y-3 text-ink-muted"
+          className="mt-5 sm:mt-7 space-y-2.5 sm:space-y-3 text-white"
           style={{ fontSize: 'clamp(14px, 1vw, 17px)' }}
         >
           {items.map((it) => (

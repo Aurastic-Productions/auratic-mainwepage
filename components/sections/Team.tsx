@@ -41,12 +41,7 @@ export default function Team() {
   return (
     <section id="team" className="section-y-lg bg-void">
       <div className="wrap border-b border-white/5 pb-24">
-        <SectionHead 
-          kicker="The Team"
-          title={<>Leadership by <span className="italic-serif text-gradient-magenta">Presence</span>.</>}
-          lede="The professional skills that typically live across an entire premium event team are present inside the founder himself. This means Aurastic is led from the ground, not from behind a desk."
-          className="!mb-8 sm:!mb-10 lg:!mb-12"
-        />
+        {/* Section header removed as per new design */}
 
         {/* Founder Featured Card */}
         <motion.div
@@ -106,6 +101,33 @@ export default function Team() {
             </motion.div>
           ))}
         </div>
+
+        {/* Join Crew CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-16 sm:mt-24 p-8 sm:p-12 text-center rounded-[2.5rem] bg-gradient-to-t from-violet-500/10 to-transparent border border-violet-500/20"
+        >
+          <div className="w-16 h-16 rounded-full bg-violet-500/20 grid place-items-center mx-auto mb-6">
+            <svg width={28} height={28} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="text-violet-300">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+          </div>
+          <h3 className="t-display-2 uppercase mb-4 tracking-tight">Join the <span className="text-magenta">Crew</span></h3>
+          <p className="t-body !text-ink-muted mb-8 max-w-2xl mx-auto leading-relaxed">
+            We are always looking for passionate individuals—from sound engineers and lighting programmers to event managers and creative minds—who want to be part of the Aurastic standard.
+          </p>
+          <a
+            href="/enquiry"
+            className="inline-flex items-center gap-3 min-h-[52px] px-8 rounded-full bg-gradient-to-br from-violet-600 to-magenta text-white text-[14px] uppercase tracking-widest font-semibold shadow-[0_10px_30px_-10px_rgba(139,92,246,0.7)] hover:-translate-y-1 transition-all"
+          >
+            Apply Now
+          </a>
+        </motion.div>
       </div>
     </section>
   );

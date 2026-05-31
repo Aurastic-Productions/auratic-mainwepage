@@ -38,24 +38,60 @@ const config: Config = {
     },
     extend: {
       colors: {
-        void: '#050209',
-        deep: '#0a0514',
-        surface: '#120826',
-        card: '#17103a',
-        raised: '#1f1550',
-        violet: {
-          900: '#2b1065',
-          700: '#5b21b6',
-          500: '#8b5cf6',
-          400: '#a78bfa',
-          300: '#c4b5fd',
-          200: '#ddd6fe',
+        // ── Aurastic Brand Colors (Official Brand Guidelines) ──
+        // Background scale
+        void:    '#07050D',   // Aurastic Deep -80% shade
+        deep:    '#100B1B',   // Aurastic Deep -60%
+        surface: '#181028',   // Aurastic Deep -40%
+        card:    '#201636',   // Aurastic Deep -20%
+        raised:  '#281C44',   // Aurastic Deep BASE
+
+        // Aurastic Primary palette
+        primary: {
+          DEFAULT: '#4E2E88',  // Aurastic Primary BASE
+          20:  '#71579F',      // Primary -20%
+          40:  '#3E246C',      // Primary shade -20%
+          60:  '#2E1B51',      // Primary shade -40%
+          80:  '#1F1236',      // Primary shade -60%
+          light20: '#9481B7',  // Primary tint +40%
+          light40: '#B8ABCF',  // Primary tint +60%
+          light80: '#DBD5E7',  // Primary tint +80%
         },
-        magenta: '#e879f9',
-        glow: '#b794ff',
-        ink: '#f8f5ff',
-        'ink-muted': '#a89cc5',
-        'ink-faint': '#6b6189',
+
+        // Aurastic Secondary
+        secondary: '#3A2E72',
+
+        // Tertiary
+        tertiary: '#6C59E2',
+
+        // AI palette
+        ai: {
+          deep:    '#400898',
+          primary: '#5525E8',
+          glow:    '#7700E0',
+        },
+
+        // Light purple accent
+        'light-purple': '#B58FFF',
+
+        // Violet scale (kept for Tailwind utility classes)
+        violet: {
+          900: '#2E1B51',
+          700: '#4E2E88',
+          500: '#6C59E2',
+          400: '#997CF1',
+          300: '#BBA7F5',
+          200: '#DDD3FA',
+        },
+
+        // Magenta / pink accent
+        magenta: '#B58FFF',   // Light Purple from brand palette
+        glow:    '#7700E0',   // AI Glow
+
+        // Text scale
+        ink:          '#FFFFFF',
+        'ink-muted':  '#B58FFF',  // Light Purple
+        'ink-faint':  '#71579F',  // Primary -20%
       },
       fontFamily: {
         // Brand-mapped families (Aurastic identity system)

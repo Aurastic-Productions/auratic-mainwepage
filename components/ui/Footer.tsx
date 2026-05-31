@@ -5,14 +5,24 @@ import Image from 'next/image';
 
 const COLS = [
   {
-    title: 'Services',
+    title: 'Event Production',
     items: [
-      { label: 'Audio system', href: '/#services' },
-      { label: 'Lighting & LED', href: '/#services' },
-      { label: 'Stage & truss', href: '/#services' },
-      { label: 'SFX & pyro', href: '/#services' },
-      { label: 'Media production', href: '/#services' },
-      { label: 'Production management', href: '/#services' },
+      { label: 'Professional Audio', href: '/#services' },
+      { label: 'Intelligent Lighting', href: '/#services' },
+      { label: 'LED Visual Experience', href: '/#services' },
+      { label: 'Stage Truss & Fabrication', href: '/#services' },
+      { label: 'Special Effects & Pyro', href: '/#services' },
+      { label: 'Event Media Production', href: '/#services' },
+    ],
+  },
+  {
+    title: 'Event Management',
+    items: [
+      { label: 'Celebrity Management', href: '/#services' },
+      { label: 'Operations & Logistics', href: '/#services' },
+      { label: 'Permissions & Licensing', href: '/#services' },
+      { label: 'Production Management', href: '/#services' },
+      { label: 'Decor & Aesthetics', href: '/#services' },
     ],
   },
   {
@@ -46,9 +56,12 @@ const BUSINESS = [
 export default function Footer() {
   return (
     <footer
-      className="pt-20 sm:pt-28 lg:pt-[120px] pb-10 border-t border-white/[0.08] bg-gradient-to-b from-transparent to-void"
+      className="relative pt-20 sm:pt-28 lg:pt-[120px] pb-10 bg-void border-t border-white/[0.1] overflow-hidden"
       style={{ paddingBottom: 'calc(2.5rem + env(safe-area-inset-bottom))' }}
     >
+      {/* Decorative top glow */}
+      <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-violet-500/50 to-transparent" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-screen-xl h-[500px] bg-[radial-gradient(ellipse_at_top,rgba(139,92,246,0.08)_0%,transparent_70%)] pointer-events-none" />
       <div className="wrap">
         <div className="grid gap-12 sm:gap-14 grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:gap-16 pb-12 sm:pb-14 border-b border-white/[0.08]">
           <div className="col-span-2 lg:col-span-1">
@@ -60,19 +73,30 @@ export default function Footer() {
               <Image
                 src="/brand/aurastic-white.png"
                 alt="Aurastic Productions"
-                width={300}
-                height={72}
-                className="h-12 sm:h-14 lg:h-16 w-auto"
+                width={400}
+                height={96}
+                className="h-20 sm:h-24 lg:h-28 w-auto"
               />
             </Link>
             <p className="mt-5 sm:mt-6 t-body max-w-[36ch]">
-              An artistic event production company in South India. Every event deserves
-              an aura — we create it.
+              An artistic event production company in South India.
+            </p>
+            <p className="mt-6 text-xl lg:text-2xl tracking-widest text-white uppercase" style={{ fontFamily: 'var(--font-bankgothic, "Bank Gothic", sans-serif)' }}>
+              Every event deserves an aura - we create it ....
             </p>
             <p className="mt-4 t-meta max-w-[40ch]">
               D.2/238-C, Ground Floor, TSP Camp Road, Veerapuram, Chennai, Tiruvallur
               District, Tamil Nadu — 600055.
             </p>
+            <div className="mt-8 sm:mt-10">
+              <Image
+                src="/brand/AU_EP WHITE.png"
+                alt="A New Era Of Event Production"
+                width={500}
+                height={120}
+                className="w-[240px] sm:w-[320px] h-auto object-contain opacity-90 drop-shadow-[0_10px_30px_rgba(119,0,224,0.4)]"
+              />
+            </div>
           </div>
           {COLS.map((col) => (
             <div key={col.title}>
@@ -107,7 +131,26 @@ export default function Footer() {
           <div className="flex gap-2.5">
             {[
               {
-                href: 'https://instagram.com/aurastic_official',
+                href: 'https://www.youtube.com/@AURASTIC_PRODUCTIONS',
+                label: 'YouTube',
+                icon: (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" />
+                    <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" />
+                  </svg>
+                ),
+              },
+              {
+                href: 'https://www.facebook.com/share/18VuWyPNhA/',
+                label: 'Facebook',
+                icon: (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                  </svg>
+                ),
+              },
+              {
+                href: 'https://www.instagram.com/aurastic_official?igsh=MTR4bGVpYmIwN3N5MQ==',
                 label: 'Instagram',
                 icon: (
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
@@ -118,21 +161,30 @@ export default function Footer() {
                 ),
               },
               {
-                href: 'https://wa.me/917845856809',
-                label: 'WhatsApp',
+                href: 'https://www.threads.com/@aurastic_official',
+                label: 'Threads',
                 icon: (
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.7 1.5 5.3L2 22l4.9-1.3c1.5.8 3.3 1.3 5.1 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2Zm0 18.3c-1.7 0-3.3-.5-4.7-1.3l-.3-.2-3.3.9.9-3.2-.2-.3C3.5 15 3 13.5 3 12 3 7.1 7.1 3 12 3s9 4.1 9 9-4.1 8.3-9 8.3Z" />
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="4" />
+                    <path d="M16 12v1a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94" />
                   </svg>
                 ),
               },
               {
-                href: 'mailto:aurasticproduction@gmail.com',
-                label: 'Email',
+                href: 'https://x.com/Aurastic_off',
+                label: 'Twitter',
                 icon: (
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
-                    <rect x={3} y={5} width={18} height={14} rx={2} />
-                    <path d="m3 7 9 6 9-6" />
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+                  </svg>
+                ),
+              },
+              {
+                href: 'https://www.linkedin.com/company/aurastic-productions/about/?viewAsMember=true',
+                label: 'LinkedIn',
+                icon: (
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                   </svg>
                 ),
               },
@@ -154,3 +206,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+

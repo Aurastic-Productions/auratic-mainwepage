@@ -168,9 +168,9 @@ export default function CursorGlow() {
         style={{
           width: hovering === 'link' ? 56 : hovering === 'text' ? 8 : 14,
           height: hovering === 'link' ? 56 : hovering === 'text' ? 40 : 14,
-          backgroundColor: hovering === 'link' ? 'rgba(232,121,249,0.15)' : 'transparent',
-          border: hovering === 'link' ? '1.5px solid rgba(232,121,249,0.9)' : '1.5px solid rgba(232,121,249,0.9)',
-          boxShadow: '0 0 20px rgba(232,121,249,0.6), 0 0 40px rgba(139,92,246,0.4)',
+          backgroundColor: hovering === 'link' ? 'rgba(124,58,237,0.15)' : 'transparent',
+          border: hovering === 'link' ? '1.5px solid rgba(124,58,237,0.9)' : '1.5px solid rgba(124,58,237,0.9)',
+          boxShadow: '0 0 20px rgba(124,58,237,0.6), 0 0 40px rgba(139,92,246,0.4)',
           borderRadius: hovering === 'text' ? '2px' : '999px',
           mixBlendMode: 'screen',
         }}
@@ -179,3 +179,5 @@ export default function CursorGlow() {
     </>
   );
 }
+
+

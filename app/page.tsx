@@ -7,15 +7,12 @@ import { useDevice } from '@/lib/useDevice';
 
 import Hero from '@/components/sections/Hero';
 import Marquee from '@/components/sections/Marquee';
-import Story from '@/components/sections/Story';
-import DetailedServices from '@/components/sections/DetailedServices';
-import Process from '@/components/sections/Process';
-import Why from '@/components/sections/Why';
-import Promise from '@/components/sections/Promise';
 import VideoShowcase from '@/components/sections/VideoShowcase';
-import Gallery from '@/components/sections/Gallery';
-import Team from '@/components/sections/Team';
-import Contact from '@/components/sections/Contact';
+import About from '@/components/sections/About';
+import Services from '@/components/sections/Services';
+import Process from '@/components/sections/Process';
+import Audience from '@/components/sections/Audience';
+import RecentWorks from '@/components/sections/RecentWorks';
 import OneWord from '@/components/sections/OneWord';
 import SectionDivider from '@/components/motion/SectionDivider';
 import SectionTransition from '@/components/motion/SectionTransition';
@@ -40,13 +37,13 @@ export default function Page() {
   }, [device]);
 
   const pinEnd = useMemo(() => {
-    if (device.isMobile) return '+=150%';
-    return '+=200%';
+    if (device.isMobile) return '+=80%';
+    return '+=100%';
   }, [device.isMobile]);
 
   const sectionHeight = useMemo(() => {
-    if (device.isMobile) return '250vh';
-    return '300vh';
+    if (device.isMobile) return '150vh';
+    return '180vh';
   }, [device.isMobile]);
 
   useEffect(() => {
@@ -130,27 +127,26 @@ export default function Page() {
 
       <Marquee />
 
-      <SectionTransition><Story /></SectionTransition>
-      
-      <SectionDivider label="Capabilities" />
-      <SectionTransition><DetailedServices /></SectionTransition>
+      <SectionDivider label="About Aurastic" />
+      <SectionTransition><About /></SectionTransition>
+
+      <SectionDivider label="Our Sectors" />
+      <SectionTransition><Services /></SectionTransition>
+
+      <SectionDivider label="Who We Serve" />
+      <SectionTransition><Audience /></SectionTransition>
+
+      <SectionDivider label="The Framework" />
       <SectionTransition><Process /></SectionTransition>
-      <SectionTransition><Why /></SectionTransition>
 
-      <SectionDivider label="The Promise" />
-      <SectionTransition><Promise /></SectionTransition>
-      
-      <SectionDivider label="Recent work" />
+      <SectionDivider label="Brand Film" />
       <SectionTransition><VideoShowcase /></SectionTransition>
-      <SectionTransition><Gallery /></SectionTransition>
 
-      <SectionDivider label="Our Team" />
-      <SectionTransition><Team /></SectionTransition>
-      
+      <SectionDivider label="Recent Works" />
+      <SectionTransition><RecentWorks /></SectionTransition>
+
+      <SectionDivider label="The Final Word" />
       <SectionTransition><OneWord /></SectionTransition>
-
-      <SectionDivider label="Get in touch" />
-      <SectionTransition><Contact /></SectionTransition>
     </>
   );
 }

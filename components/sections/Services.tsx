@@ -11,9 +11,9 @@ const G_DEEP = 'radial-gradient(circle at 80% 80%, rgba(232,121,249,0.25), trans
 const SERVICES = [
   {
     num: '01',
-    tag: 'Audio',
+    tag: 'Sound',
     title: 'Professional',
-    titleEm: 'Audio System',
+    titleEm: 'Sound System',
     body: 'Line arrays, subwoofers, stage monitors, digital mixing consoles, microphones, DJ setups, signal distribution, qualified audio engineers.',
     gradient: G_MAGENTA,
     icon: (
@@ -69,7 +69,7 @@ const SERVICES = [
   },
   {
     num: '05',
-    tag: 'SFX',
+    tag: 'SFX & Fireworks',
     title: 'Special Effects',
     titleEm: '& Pyrotechnics',
     body: 'Cold pyro, CO₂ jets, sparkulars, flame effects, confetti, fog and smoke effects — designed, timed, and permitted to event scale.',
@@ -83,7 +83,7 @@ const SERVICES = [
   },
   {
     num: '06',
-    tag: 'Talent',
+    tag: 'Celebrity',
     title: 'Artists & Celebrity',
     titleEm: 'Management',
     body: 'Artist booking coordination, celebrity handling, green-room and hospitality, technical riders, stage-entry choreography.',
@@ -96,7 +96,7 @@ const SERVICES = [
   },
   {
     num: '07',
-    tag: 'Power',
+    tag: 'Power & Safety',
     title: 'Venue Infrastructure',
     titleEm: '& Utilities',
     body: 'Generators and fuel, power distribution, cabling, venue illumination, barricading, electrical safety, load management.',
@@ -109,8 +109,8 @@ const SERVICES = [
   },
   {
     num: '08',
-    tag: 'Aesthetics',
-    title: 'Décor &',
+    tag: 'Decor & Aesthetics',
+    title: 'Decor &',
     titleEm: 'Aesthetics',
     body: 'Welcome arches, banners and standees, photo booths, LED-theme backdrops, stage-bottom branding, floral and lamp décor, event creatives.',
     gradient: G_DEEP,
@@ -124,7 +124,7 @@ const SERVICES = [
   },
   {
     num: '09',
-    tag: 'Media',
+    tag: 'Design & Media',
     title: 'Event Media',
     titleEm: 'Production',
     body: 'Photography (candid + traditional), cinematic videography, drone coverage, live video mixing, highlight reels, full aftermovies.',
@@ -139,7 +139,7 @@ const SERVICES = [
   },
   {
     num: '10',
-    tag: 'Operations',
+    tag: 'Operations & Logistics',
     title: 'Logistics &',
     titleEm: 'Operations',
     body: 'Equipment and crew transportation, loading and unloading, setup and dismantling, technician deployment, contingency operations.',
@@ -216,7 +216,7 @@ function ServiceCard({ service: s, index }: { service: typeof SERVICES[0]; index
       className="h-full"
     >
       <article
-        className="group relative h-full min-h-[300px] lg:min-h-[340px] p-7 sm:p-8 rounded-[20px] sm:rounded-[22px] border border-white/[0.10] overflow-hidden flex flex-col justify-between mouse:hover:border-violet-400/30 mouse:hover:-translate-y-1 transition-all duration-500"
+        className="group relative h-full min-h-[300px] lg:min-h-[340px] p-7 sm:p-8 rounded-[20px] sm:rounded-[22px] border border-white/[0.10] overflow-hidden flex flex-col justify-between hover:border-violet-400/50 hover:bg-white/[0.03] hover:-translate-y-2 hover:shadow-[0_0_40px_rgba(232,121,249,0.25)] hover:brightness-125 transition-all duration-500"
         style={{ background: s.gradient }}
       >
         <span
