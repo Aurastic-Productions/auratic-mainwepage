@@ -112,7 +112,7 @@ const SERVICES = [
     tag: 'Decor & Aesthetics',
     title: 'Decor &',
     titleEm: 'Aesthetics',
-    body: 'Welcome arches, banners and standees, photo booths, LED-theme backdrops, stage-bottom branding, floral and lamp décor, event creatives.',
+    body: 'Welcome arches, banners and standees, photo booths, LED-theme backdrops, stage-bottom branding, floral and lamp decor, event creatives.',
     gradient: G_DEEP,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">

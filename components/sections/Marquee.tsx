@@ -11,7 +11,7 @@ const ITEMS: (string | string[])[] = [
   'Artist Management',
   'Celebrity Management',
   'Venue Infrastructure',
-  ['Décor &', 'Aesthetics'],
+  ['Decor &', 'Aesthetics'],
   'Event Media Production',
   'Production Management',
   'Event Execution',
