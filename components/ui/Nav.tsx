@@ -57,7 +57,7 @@ export default function Nav() {
         <div className="wrap">
           <div
             className={`
-              flex items-center
+              flex items-center justify-between w-full
               pl-4 pr-3 py-1.5 sm:pl-5 sm:pr-3.5 sm:py-1.5
               rounded-full
               border transition-all duration-500
