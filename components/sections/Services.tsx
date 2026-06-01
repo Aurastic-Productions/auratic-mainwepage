@@ -246,11 +246,6 @@ function ServiceCard({ service: s, index }: { service: typeof SERVICES[0]; index
 
         <div className="relative mt-7 pt-5 border-t border-white/[0.08] flex items-center justify-between">
           <span className="t-kicker !text-ink-faint">{s.num} / 12</span>
-          <span className="text-violet-300 mouse:group-hover:translate-x-1 transition-transform">
-            <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round">
-              <path d="M5 12h14M13 5l7 7-7 7" />
-            </svg>
-          </span>
         </div>
       </article>
     </Reveal>
