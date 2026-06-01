@@ -56,14 +56,14 @@ const BUSINESS = [
 export default function Footer() {
   return (
     <footer
-      className="relative pt-12 sm:pt-28 lg:pt-[120px] pb-8 sm:pb-10 bg-void border-t border-white/[0.1] overflow-hidden"
+      className="relative pt-12 sm:pt-16 lg:pt-20 pb-8 bg-void border-t border-white/[0.1] overflow-hidden"
       style={{ paddingBottom: 'calc(1.5rem + env(safe-area-inset-bottom))' }}
     >
       {/* Decorative top glow */}
       <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-violet-500/50 to-transparent" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-screen-xl h-[500px] bg-[radial-gradient(ellipse_at_top,rgba(139,92,246,0.08)_0%,transparent_70%)] pointer-events-none" />
       <div className="wrap">
-        <div className="grid gap-8 sm:gap-14 grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:gap-16 pb-8 sm:pb-14 border-b border-white/[0.08]">
+        <div className="grid gap-8 sm:gap-10 lg:gap-12 grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] pb-8 sm:pb-10 border-b border-white/[0.08]">
           <div className="col-span-2 lg:col-span-1">
             <Link
               href="#top"
@@ -75,33 +75,33 @@ export default function Footer() {
                 alt="Aurastic Productions"
                 width={400}
                 height={96}
-                className="h-14 sm:h-24 lg:h-28 w-auto"
+                className="h-14 sm:h-16 lg:h-20 w-auto"
               />
             </Link>
-            <p className="mt-4 sm:mt-6 t-body max-w-[36ch] text-[13.5px] sm:text-base">
+            <p className="mt-4 t-body max-w-[36ch] text-[13.5px] sm:text-[14.5px]">
               An artistic event production company in South India.
             </p>
-            <p className="mt-4 sm:mt-6 text-[15px] sm:text-xl lg:text-2xl tracking-widest text-white uppercase" style={{ fontFamily: 'var(--font-bankgothic, "Bank Gothic", sans-serif)' }}>
+            <p className="mt-4 sm:mt-5 text-[15px] sm:text-lg lg:text-xl tracking-widest text-white uppercase" style={{ fontFamily: 'var(--font-bankgothic, "Bank Gothic", sans-serif)' }}>
               Every event deserves an aura - we create it ....
             </p>
-            <p className="mt-4 t-meta max-w-[40ch] leading-relaxed">
+            <p className="mt-4 t-meta max-w-[40ch] leading-relaxed text-xs sm:text-[13px]">
               D.2/238-C, Ground Floor, TSP Camp Road, Veerapuram, Chennai, Tiruvallur
               District, Tamil Nadu — 600055.
             </p>
-            <div className="mt-6 sm:mt-10">
+            <div className="mt-6 sm:mt-8">
               <Image
                 src="/brand/AU_EP WHITE.png"
                 alt="A New Era Of Event Production"
                 width={500}
                 height={120}
-                className="w-[180px] sm:w-[320px] h-auto object-contain opacity-90 drop-shadow-[0_10px_30px_rgba(119,0,224,0.4)]"
+                className="w-[180px] sm:w-[220px] lg:w-[260px] h-auto object-contain opacity-90 drop-shadow-[0_10px_30px_rgba(119,0,224,0.4)]"
               />
             </div>
           </div>
           {COLS.map((col) => (
-            <div key={col.title} className="lg:pt-5">
-              <h5 className="t-kicker !text-violet-300 mb-4 sm:mb-6">{col.title}</h5>
-              <ul className="space-y-2.5 sm:space-y-3.5">
+            <div key={col.title} className="lg:pt-2">
+              <h5 className="t-kicker !text-violet-300 mb-4 sm:mb-5">{col.title}</h5>
+              <ul className="space-y-2.5 sm:space-y-3">
                 {col.items.map((it) => {
                   // Phone number uses Exo (numerical/data) per brand spec
                   const isPhone = it.href.startsWith('tel:');
@@ -126,7 +126,7 @@ export default function Footer() {
         </div>
 
 
-        <div className="flex flex-wrap justify-between items-center gap-5 pt-7 text-[12px] sm:text-[13px] text-ink-faint">
+        <div className="flex flex-wrap justify-between items-center gap-5 pt-5 sm:pt-6 text-[12px] sm:text-[13px] text-ink-faint">
           <div>© 2025 – 2026 Aurastic Productions. All rights reserved.</div>
           <div className="flex gap-2.5">
             {[
