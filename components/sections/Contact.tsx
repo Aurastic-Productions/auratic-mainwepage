@@ -93,9 +93,7 @@ export default function Contact() {
                   className="mt-4 sm:mt-5 text-ink-muted leading-[1.6] max-w-[38ch]"
                   style={{ fontSize: 'clamp(14px, 1vw, 16px)' }}
                 >
-                  Reach us on any channel below, or send a message using the form. We
-                  reply within <strong className="text-violet-300">2 hours</strong> on
-                  working days.
+                  Reach us on any channel below, or send a message using the form.
                 </p>
 
                 <div className="mt-8 sm:mt-10 space-y-3 sm:space-y-3.5">
@@ -220,11 +218,7 @@ export default function Contact() {
                       </div>
                     )}
 
-                    <div className="sm:col-span-2 mt-1 flex items-center justify-between gap-4 flex-wrap">
-                      <p className="text-[12px] sm:text-[13px] text-ink-muted">
-                        We'll reply within{' '}
-                        <strong className="text-violet-300">2 hours</strong>.
-                      </p>
+                    <div className="sm:col-span-2 mt-1 flex items-center justify-end gap-4 flex-wrap">
                       <button
                         type="submit"
                         disabled={status === 'sending'}
@@ -353,8 +347,7 @@ function SuccessState({ onReset }: { onReset: () => void }) {
         Message <span className="italic-serif text-violet-300">sent.</span>
       </h3>
       <p className="mt-3 text-ink-muted max-w-[38ch]" style={{ fontSize: 'clamp(14px, 1vw, 17px)' }}>
-        Thanks for reaching out! We've got your message and will reply within 2 hours on
-        working days. Check your spam folder just in case.
+        Thanks for reaching out! We've got your message. Check your spam folder just in case.
       </p>
       <button
         onClick={onReset}
