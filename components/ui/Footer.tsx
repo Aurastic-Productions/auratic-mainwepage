@@ -99,7 +99,7 @@ export default function Footer() {
             </div>
           </div>
           {COLS.map((col) => (
-            <div key={col.title}>
+            <div key={col.title} className="lg:pt-5">
               <h5 className="t-kicker !text-violet-300 mb-5 sm:mb-6">{col.title}</h5>
               <ul className="space-y-3 sm:space-y-3.5">
                 {col.items.map((it) => {
