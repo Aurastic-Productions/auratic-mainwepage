@@ -175,6 +175,10 @@ section {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  padding-right: 0.25em;
+  margin-right: -0.25em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 .text-gradient-magenta {
@@ -182,6 +186,10 @@ section {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  padding-right: 0.25em;
+  margin-right: -0.25em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 /* Productions gradient utility */
@@ -206,6 +214,8 @@ section {
   font-family: var(--font-serif);
   font-style: italic;
   font-weight: 400;
+  padding-right: 0.15em;
+  margin-right: -0.15em;
 }
 
 /* --------------------------------------------------------------------
@@ -521,5 +531,9 @@ canvas {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: gradient-flow 4s linear infinite;
-  display: block;
+  display: inline-block;
+  padding-right: 0.25em;
+  margin-right: -0.25em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }

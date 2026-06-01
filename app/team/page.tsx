@@ -129,7 +129,7 @@ export default function TeamPage() {
               {/* Portrait card */}
               <div className="relative">
                 <div className="relative aspect-[3/4] max-w-[460px] mx-auto lg:mx-0 w-full rounded-[20px] sm:rounded-[24px] overflow-hidden border border-white/[0.22] bg-gradient-to-b from-violet-700 to-surface">
-                  <img src="/team/founder_cropped.jpg" alt="Dwarakesh Venkateshan" className="w-full h-full object-cover" />
+                  <img src="/team/founder_new.jpg" alt="Dwarakesh Venkateshan" className="w-full h-full object-cover" />
                 </div>
 
 
@@ -363,8 +363,8 @@ export default function TeamPage() {
                       </p>
                     )}
 
-                    <div className="mt-4 pt-4 border-t border-dashed border-white/[0.12] flex items-center justify-between">
-                      {m.filled ? (
+                    {m.filled && (
+                      <div className="mt-4 pt-4 border-t border-dashed border-white/[0.12] flex items-center justify-between">
                         <Link
                           href="#founder-spotlight"
                           className="text-[11px] sm:text-[12px] tracking-[0.05em] text-violet-200 mouse:hover:text-white inline-flex items-center gap-1.5"
@@ -374,19 +374,9 @@ export default function TeamPage() {
                             <path d="M5 12h14M13 5l7 7-7 7" />
                           </svg>
                         </Link>
-                      ) : (
-                        <span className="text-[11px] sm:text-[12px] tracking-[0.05em] text-ink-faint italic">
-                          Position open · Coming soon
-                        </span>
-                      )}
-                      <span
-                        className={`w-2 h-2 rounded-full ${
-                          m.filled
-                            ? 'bg-violet-300 shadow-[0_0_10px_#a78bfa]'
-                            : 'bg-violet-400 shadow-[0_0_10px_#7C3AED] animate-[pulse_2s_ease-in-out_infinite]'
-                        }`}
-                      />
-                    </div>
+                        <span className="w-2 h-2 rounded-full bg-violet-300 shadow-[0_0_10px_#a78bfa]" />
+                      </div>
+                    )}
                   </div>
                 </article>
               </Reveal>

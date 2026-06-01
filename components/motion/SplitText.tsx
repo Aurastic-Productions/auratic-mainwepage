@@ -70,7 +70,7 @@ export default function SplitText({
   return (
     <Component ref={ref} className={cn(className)} aria-label={children}>
       {words.map((word, wi) => (
-        <span key={wi} className="inline-block overflow-hidden" aria-hidden="true">
+        <span key={wi} className="inline-block overflow-hidden pr-[0.15em] -mr-[0.15em]" aria-hidden="true">
           <span className="inline-block">
             {Array.from(word).map((ch, ci) => (
               <span key={ci} className="char inline-block">
