@@ -23,7 +23,7 @@ export default function Reveal({
   className,
   as: Tag = 'div',
   delay = 0,
-  duration = 1.1,
+  duration = 0.75,
   direction = 'up',
   distance = 50,
   stagger = false,
@@ -83,7 +83,7 @@ export default function Reveal({
           stagger: stagger ? 0.08 : 0,
           scrollTrigger: {
             trigger: el,
-            start: 'top 88%',
+            start: 'top 96%',
             toggleActions: once ? 'play none none none' : 'play reverse play reverse',
           },
         },
