@@ -13,7 +13,7 @@ export default function VideoShowcase() {
             webkit-playsinline="true"
             preload="auto"
           >
-            <source src="/videos/AU_INTRO_FINAL.mp4" type="video/mp4" />
+            <source src="/videos/AU_INTRO_EXTREME.mp4" type="video/mp4" />
           </video>
         </div>
       </div>
