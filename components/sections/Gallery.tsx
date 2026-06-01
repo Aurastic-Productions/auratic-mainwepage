@@ -21,7 +21,7 @@ const ITEMS = [
   { src: '/gallery/IMG_6044.jpg', alt: 'Aesthetics' },
   { src: '/gallery/Untitled - 30 May 2026 at 22.16.43.jpg', alt: 'Scaffolding Build' },
   { src: '/gallery/Untitled - 30 May 2026 at 22.22.06.jpg', alt: 'LED Panel Rigging' },
-  { src: '/gallery/Untitled-2-08.jpg', alt: 'Celebrity', pos: 'object-top' },
+  { src: '/gallery/celebrity-upright.jpg', alt: 'Celebrity', pos: 'object-top' },
   { src: '/gallery/corprate .jpg', alt: 'Corporate Setup' },
   { src: '/gallery/Direction.jpg', alt: 'Direction' },
   { src: '/gallery/Visuals.jpg', alt: 'Visuals' },
