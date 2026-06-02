@@ -11,7 +11,7 @@ export default function VideoShowcase() {
             playsInline
             // @ts-ignore iOS
             webkit-playsinline="true"
-            preload="auto"
+            preload="none"
           >
             <source src="/videos/AU_INTRO_EXTREME.mp4" type="video/mp4" />
           </video>

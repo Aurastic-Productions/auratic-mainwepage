@@ -99,7 +99,6 @@ function MarqueeRow({ items, direction, speed }: { items: typeof ITEMS, directio
               src={it.src}
               alt={it.alt}
               fill
-              unoptimized
               sizes="(max-width: 640px) 250px, 400px"
               className={`object-cover transition-transform duration-700 ease-out group-hover/row:brightness-50 group-hover/item:!brightness-110 group-hover/item:scale-110 ${it.pos || 'object-center'}`}
             />

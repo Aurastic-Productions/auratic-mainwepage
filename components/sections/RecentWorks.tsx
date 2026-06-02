@@ -76,7 +76,6 @@ export default function RecentWorks() {
                 src={pic}
                 alt={`Recent Work ${i+1}`}
                 fill
-                unoptimized
                 sizes="(max-width: 640px) 85vw, (max-width: 1024px) 45vw, 35vw"
                 className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               />
